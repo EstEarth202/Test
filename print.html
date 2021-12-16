@@ -593,60 +593,38 @@ You are <strong>not</strong> required to correctly set the traits of your custom
 <p>The convention only applies if your function will affect an unknown entity. If you are trying to target a known entity (e.g. an entity with a special tag attached specific to your datapack), you don't need to follow this convention.</p>
 <hr />
 <h3 id="additional-implementation-guideline-optional"><a class="header" href="#additional-implementation-guideline-optional"><strong>Additional Implementation Guideline (Optional)</strong></a></h3>
-<ol>
-<li>You don't want anyone to kill your entity. But there's no problem if it moves.</li>
-</ol>
+<h4 id="1-you-dont-want-anyone-to-kill-your-entity-but-theres-no-problem-if-it-moves"><a class="header" href="#1-you-dont-want-anyone-to-kill-your-entity-but-theres-no-problem-if-it-moves">1. You don't want anyone to kill your entity. But there's no problem if it moves.</a></h4>
 <pre><code class="language-mcfunction">summom zombie ~ ~ ~ {Tags:[&quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.kill&quot;]}
 </code></pre>
-<ol start="2">
-<li>This entity not use global ignoring tag since this is a temporary entity that is killed off right away.</li>
-</ol>
-<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: [&quot;dp.example&quot;], Age: 0, Duration: 1}
+<blockquote>
+<p>Remove global ignoring tag with <code>@e[tag=dp.example]</code> after done using it.</p>
+</blockquote>
+<h4 id="2-this-entity-not-use-global-ignoring-tag-since-this-is-a-temporary-entity-that-is-killed-off-right-away"><a class="header" href="#2-this-entity-not-use-global-ignoring-tag-since-this-is-a-temporary-entity-that-is-killed-off-right-away">2. This entity not use global ignoring tag since this is a temporary entity that is killed off right away.</a></h4>
+<pre><code class="language-mcfunction">summom area_effect_cloud ~ ~ ~ {Tags: [&quot;dp.example&quot;], Age: 0, Duration: 1}
 
 kill @e[tag=dp.example]
 </code></pre>
-<ol start="3">
-<li>This is a &quot;chunk marker&quot; entity that shouldn't be move or kill by other datapack, so this entity must have all global ignoring tag.</li>
-</ol>
-<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: `[ &quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ]`, Age: 0, Duration: 2147483647}
+<h4 id="3-this-is-a-chunk-marker-entity-that-shouldnt-be-move-or-kill-by-other-datapack-so-this-entity-must-have-all-global-ignoring-tag"><a class="header" href="#3-this-is-a-chunk-marker-entity-that-shouldnt-be-move-or-kill-by-other-datapack-so-this-entity-must-have-all-global-ignoring-tag">3. This is a &quot;chunk marker&quot; entity that shouldn't be move or kill by other datapack, so this entity must have all global ignoring tag.</a></h4>
+<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: [ &quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ]}
 </code></pre>
-<ol start="4">
-<li>If you don't want the command to execute due entity <code>global.ignore</code> is in an area, </li>
-</ol>
+<h4 id="4-if-you-dont-want-the-command-to-execute-because-the-area-contains-a-global-ignoring-tag"><a class="header" href="#4-if-you-dont-want-the-command-to-execute-because-the-area-contains-a-global-ignoring-tag">4. If you don't want the command to execute because the area contains a global ignoring tag.</a></h4>
 <pre><code class="language-mcfunction">execute if entity @e[tag=!global.ignore,distance=..30]
 execute unless entity @e[tag=global.ignore,distance=..30]
 </code></pre>
-<blockquote>
-<p><strong>Q :</strong> I can use 'global.ignore' to tag my entities. But how do I remove it after using it?</p>
-<p><strong>A :</strong> You can tag it with your own tag (<code>[&quot;global.ignore&quot;, &quot;owner.tag&quot;]</code>) and then remove with <code>@e[tag=owner.tag]</code></p>
-</blockquote>
-<p><strong>Q :</strong> Can I use score to filter <code>!global.ignore</code>?
-such as </p>
+<h4 id="5-use-score-to-filter-global-ignoring-tag---"><a class="header" href="#5-use-score-to-filter-global-ignoring-tag---">5. Use score to filter global ignoring tag. ( * )</a></h4>
 <pre><code class="language-mcfunction">scoreboard players set @e[tag=!global.ignore.kill] faq.pass 1
 kill @e[scores={faq.pass=1}]
 </code></pre>
-<ul>
-<li><strong>A :</strong> Yes, you can. But you need to make sure that your score isn't altered in any other way that you might do accidentally.</li>
-</ul>
 <blockquote>
-<ul>
-<li><strong>Q :</strong> If I'm not sure any <code>@s</code> has <code>!global.ignore</code> filtering at entry selector, can I use in <code>@s</code> instead?</li>
-<li><strong>A :</strong> Yes, you can. But don't worry, I can check it. And in some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in <code>@s</code> it works normally, you can consider use this method. Which you can note on why you use it before I'll review it. This is because in practice, use global ignoring tags at entry selectors results in less tag usage.</li>
-</ul>
-<pre><code class="language-mcfunction"># Examples of usage found
-# Pragmatic
-execute as @e[tag=!global.ignore,tag=!global.ignore.kill] run function &lt;...&gt;
-  ├ kill @s
-  ├ kill @s
-  ╰ Kill @s
+<p>This method may be useful in some situations. ( ** )</p>
+</blockquote>
+<h4 id="6-use-in-s---"><a class="header" href="#6-use-in-s---">6. Use in @s ( * )</a></h4>
+<pre><code class="language-mcfunction">execute as @e[tag=!global.ignore] run function dp:example/kill
 
-# Use in @s
-&gt; execute as @e[tag=!global.ignore] run function &lt;...&gt;
-  ├ kill @s[tag=!global.ignore.kill]
-  ├ kill @s[tag=!global.ignore.kill]
-  ╰ Kill @s[tag=!global.ignore.kill]
-# From this situation it was found that before kill command, there are some commands that must execute with tagged entities global.ignore.kill. But there were no kills in any of the commands at that point.
+dp:example/kill -&gt; kill @s[tag=!global.ignore.kill]
 </code></pre>
+<blockquote>
+<p>Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in <code>@s</code> it works normally. ( ** )</p>
 </blockquote>
 <blockquote>
 <ul>
@@ -654,6 +632,14 @@ execute as @e[tag=!global.ignore,tag=!global.ignore.kill] run function &lt;...&g
 <li><strong>A:</strong> Will be exempt in cases where <strong># Use in @s</strong> is true but shouldn't. Because if there is any issue in the future, we cannot ignore it. But don't worry, we'll review and clarify for you.</li>
 </ul>
 </blockquote>
+<blockquote>
+<p><strong>Note</strong></p>
+<ul>
+<li>( * ) : <strong>Not recommended if you are unsure.</strong></li>
+<li>( ** ) : Be careful, man in the middle. </li>
+</ul>
+</blockquote>
+<p>But you need to make sure that your score isn't altered in any other way that you might do accidentally.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="global-durability-"><a class="header" href="#global-durability-">Global Durability (<code>*</code>)</a></h1>
 <h2 id="about-6"><a class="header" href="#about-6">About</a></h2>
 <p>This convention extends the functionality of the <a href="conventions/./common_trait.html">Common Trait Convention</a> by providing a syntax for &quot;custom durability&quot; which can be useful for datapacks that add tools that have durability.</p>
