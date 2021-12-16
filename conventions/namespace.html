@@ -1,0 +1,419 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Namespace Convention*** - MC Datapacks</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Minecraft Datapacks</a></li><li class="chapter-item expanded "><a href="../conventions/index.html"><strong aria-hidden="true">1.</strong> Official Conventions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../conventions/datapack_advancement.html"><strong aria-hidden="true">1.1.</strong> Datapack Advancement*</a></li><li class="chapter-item expanded "><a href="../conventions/datapack_uninstallation.html"><strong aria-hidden="true">1.2.</strong> Datapack Uninstallation*</a></li><li class="chapter-item expanded "><a href="../conventions/common_trait.html"><strong aria-hidden="true">1.3.</strong> Common Trait Convention**</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../conventions/common_trait/examples.html"><strong aria-hidden="true">1.3.1.</strong> Examples</a></li></ol></li><li class="chapter-item expanded "><a href="../conventions/custom_model_id.html"><strong aria-hidden="true">1.4.</strong> Custom Model ID***</a></li><li class="chapter-item expanded "><a href="../conventions/global_ignoring_tag.html"><strong aria-hidden="true">1.5.</strong> Global Ignoring Tag***</a></li><li class="chapter-item expanded "><a href="../conventions/global_durability.html"><strong aria-hidden="true">1.6.</strong> Global Durability*</a></li><li class="chapter-item expanded "><a href="../conventions/namespace.html" class="active"><strong aria-hidden="true">1.7.</strong> Namespace Convention***</a></li><li class="chapter-item expanded "><a href="../conventions/shulker_box_loot_table.html"><strong aria-hidden="true">1.8.</strong> Shulker Box Loot Table***</a></li><li class="chapter-item expanded "><a href="../conventions/global_forceload_tag.html"><strong aria-hidden="true">1.9.</strong> Global Forceload Tag***</a></li></ol></li><li class="chapter-item expanded "><a href="../style_guideline/index.html"><strong aria-hidden="true">2.</strong> Style Guideline</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../style_guideline/datapack_advancement.html"><strong aria-hidden="true">2.1.</strong> Datapack Advancement</a></li><li class="chapter-item expanded "><a href="../style_guideline/datapack_uninstallation.html"><strong aria-hidden="true">2.2.</strong> Datapack Uninstallation</a></li><li class="chapter-item expanded "><a href="../style_guideline/reloading_message.html"><strong aria-hidden="true">2.3.</strong> Reloading Message</a></li></ol></li><li class="chapter-item expanded "><a href="../certified_datapacks/index.html"><strong aria-hidden="true">3.</strong> Certified Datapacks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../certified_datapacks/requirement.html"><strong aria-hidden="true">3.1.</strong> Requirement</a></li></ol></li><li class="chapter-item expanded "><a href="../tips/index.html"><strong aria-hidden="true">4.</strong> Tips</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tips/enum_scoreboard.html"><strong aria-hidden="true">4.1.</strong> Enum Scoreboard</a></li><li class="chapter-item expanded "><a href="../tips/shulker_box_inventory_manipulation.html"><strong aria-hidden="true">4.2.</strong> Shulker Box Inventory Manipulation</a></li><li class="chapter-item expanded "><a href="../tips/holding_right_click_detection.html"><strong aria-hidden="true">4.3.</strong> Holding Right Click Detection</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">MC Datapacks</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="namespace-convention-"><a class="header" href="#namespace-convention-">Namespace Convention (<code>***</code>)</a></h1>
+<h2 id="about"><a class="header" href="#about">About</a></h2>
+<p>This convention aims to prevent conflict when deciding the name for your scoreboards, functions, storages, etc. by using a &quot;namespace prefix&quot;.</p>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
+<p>A namespace prefix must be used whenever it is possible. This includes tags (datapack), tags (<code>/tag</code>), nbts, scoreboards, functions, advancements, loot tables, structures, world generation settings, recipes, data storage.</p>
+<p>There is no rule specifying how you should design your namespace prefix, but these are some of the examples:</p>
+<hr />
+<pre><code class="language-mcfunction">scoreboard objectives add bb.var dummy
+team add bb.team
+</code></pre>
+<p>In this example, <code>bb</code> is the namespace that is shortened from <code>boomber</code> due to 16 characters limitation in 1.17 and below.</p>
+<pre><code class="language-mcfunction">scoreboard objectives add boomber.var dummy
+team add boomber.team
+</code></pre>
+<p>I use the entire <code>boomber</code> prefix in this example because scoreboards and teams in 1.18 don't have a character limit.</p>
+<blockquote>
+<p><code>scoreboard trigger</code> unnecessary use a namespace.
+Since it will be exposed to the user, so a nice readable name is quite important. Reviewer can allow it for now considering the benefit of readable trigger name.</p>
+<p><code>fake_player</code> as well because it is already inside the  namespace objective. But if you want to keep it clear and organized, you can use full prefix because <code>fake_player</code> don't have a character limit. <code>#boomber.variable_θ bb.data</code></p>
+</blockquote>
+<hr />
+<pre><code class="language-mcfunction">tag @s add boomber.foo.bar
+</code></pre>
+<p>In this example, I use a full <code>boomber</code> prefix, because tags don't have a character limit.</p>
+<hr />
+<pre><code class="language-mcfunction">data merge storage boomber:foo/bar {}
+</code></pre>
+<p>In this example data storage already has support for namespacing, so I don't need to use a prefix.</p>
+<hr />
+<pre><code class="language-mcfunction">give @s diamond{boomber: {custom_data: 123}}
+</code></pre>
+<p>In this example, I wrap the <code>custom_data</code> nbt inside another tag, allowing it to act as a namespace.</p>
+<hr />
+<p>The above examples are my style of namespacing, but there are many other approaches that you can take, such as <code>namespace_foo</code>, <code>NAMESPACEfoo</code>, <code>namespace.foo</code>, <code>namespace:foo</code> and <code>namespace/foo</code>. Your imagination is the limit!</p>
+<h2 id="note"><a class="header" href="#note">Note</a></h2>
+<p>Using <code>minecraft</code> namespace to modify vanilla's behavior is a special case and it is allowed within a reasonable situation.<br />
+However, for example, setting <code>&quot;replace&quot;</code> to <code>true</code> in the <code>tick.json</code> function tag is not a &quot;reasonable situation&quot;, because that would prevent other datapacks from working.</p>
+<hr />
+<h3 id="additional-guideline-optional"><a class="header" href="#additional-guideline-optional"><strong>Additional Guideline (Optional)</strong></a></h3>
+<p><strong>1. Multiple datapacks</strong></p>
+<blockquote>
+<p><strong>Please note:</strong> Namespaces are not recommended as datapack names, which may cause some issues.</p>
+</blockquote>
+<p><strong>1.1 Datapack Advancement</strong></p>
+<ul>
+<li><strong>Cause:</strong> use namespaces as datapack names and follow <a href="../conventions/datapack_advancement.html">3. Datapack Advancement</a> the advancement <em>should</em> be inside <code>/data/&lt;namespace&gt;/advancements/&lt;datapack name&gt;.json</code>.</li>
+<li><strong>Issue:</strong> <code>/data/&lt;datapack_name&gt;/advancements/&lt;datapack_name&gt;.json</code></li>
+</ul>
+<div style="margin-left:30px;">
+<pre><code>data
+ ├ &lt;namespace&gt; &lt;- It doesn't make sense to set it as datapack_name.
+ │    └ advancements         
+ │        └ &lt;datapack_name&gt;.json
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        ├ &lt;namespace&gt;.json &lt;- &quot;This is creator_head&quot; * That's why
+ │        └ root.json
+</code></pre>
+</div>
+<ul>
+<li><strong>Solution:</strong> fact it's creator name.</li>
+<li><strong>Because:</strong> you have more than one datapack under the namespace, it will be very helpful when you work on workspace. <img src="./namespace/workspace.png" alt="" /></li>
+<li><strong>Result:</strong> <code>&lt;creator_name&gt;:&lt;datapack_name&gt;</code> prefix is to identify who created it and suffix to tell about datapack. This will be explained further in <a href="#directories-guideline">Directories guideline</a></li>
+</ul>
+<p><strong>1.2 Scoreboards and teams:</strong> 1.17 and below</p>
+<ul>
+<li><strong>Shouldn't:</strong> use shortened prefix as datapack name.</li>
+<li><strong>Cause:</strong> suppose datapack <code>Bounce block</code> uses objective as <code>bb.var</code>.</li>
+<li><strong>Result:</strong> if <code>bb</code> is shortened prefix from <code>boomber</code>. It can be an issue.</li>
+<li><strong>Please note:</strong> It is difficult to verify this. This makes it inconvenient for the reviewer, and therefore cannot guarantee that certified datapacks will not cause scoreboard conflicts.</li>
+</ul>
+<p><strong>1.3 Scoreboards and teams:</strong> 1.18 and higher <strong>Tags: 1.13 and higher</strong></p>
+<ul>
+<li><strong>Should:</strong> use a full prefix.</li>
+</ul>
+<p><strong>1.4 Storage:</strong> If let me advice, I hope this section will be useful to uninstall.</p>
+<ul>
+<li><strong>Advice</strong>: <code>boomber:&lt;datapack_name&gt; bb.&lt;path_storage_name&gt;</code> </li>
+<li><strong>Because:</strong> If you use a prefix, you can remove storage with a single command.  Example: <code>data remove storage boomber:&lt;datapack_name&gt; bb</code>. </li>
+<li><strong>Standalone datapack:</strong> Example from The Creeper's Code pack is interesting.
+<code>tcc:storage root.&lt;path_storage&gt;</code></li>
+</ul>
+<hr />
+<p><strong>2. Standalone datapack</strong></p>
+<p><strong>Note:</strong> Completely free with namespaces.</p>
+<pre><code>data
+ ├ &lt;namespace&gt; &lt;- It make sense to use datapack name.
+ │    └ &lt;...&gt;
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        ├ standalone 
+ │        │    └ &lt;datapack_node&gt;.json &lt;- &quot;This is datapack node&quot; * That's why completely free.
+ │        └ root.json
+</code></pre>
+<ul>
+<li><strong>Because:</strong> you have one datapack under the namespace.</li>
+<li><strong>Result:</strong> <code>&lt;project name&gt;:&lt;every_internal_function&gt;</code></li>
+</ul>
+<hr />
+<p><strong>3. Directories guideline</strong></p>
+<blockquote>
+<p><strong>Guideline Optional</strong></p>
+<ul>
+<li><strong>Standalone datapack:</strong> Completely free, as long as you want to do.</li>
+<li><strong>Multiple datapacks:</strong> If possible, I would recommend the following.</li>
+</ul>
+</blockquote>
+<p><strong>Q:</strong> If I use <code>creator_name</code> instead of <code>datapack_name</code>. I'm going to have an issue like this</p>
+<pre><code>&quot;friendly_beacon:main&quot; -&gt; &quot;boomber:main&quot;
+&quot;shulker_mob:main&quot; -&gt; &quot;boomber:main&quot;
+</code></pre>
+<p><strong>A:</strong> You can create <code>sub-folders</code> inside <code>functions</code> folder.</p>
+<pre><code>boomber/functions/friendly_beacon/
+boomber/functions/shulker_mob/
+
+&quot;friendly_beacon:main&quot; -&gt; &quot;boomber:friendly_beacon/main&quot;
+&quot;shulker_mob:main&quot; -&gt; &quot;boomber:shulker_mob/main&quot;
+
+If you want an example guideline, I have it.
+
+data
+ ├ &lt;your_name&gt;
+ │    ├ advancements
+ │    │   ├ &lt;datapack_name&gt;
+ │    │   │   ├ &lt;event&gt;
+ │    │   │   │   └ &lt;player_hurt_entity&gt;.json
+ │    │   │   ├ &lt;place&gt;
+ │    │   │   │   └ &lt;place_block&gt;.json
+ │    │   │   └ &lt;folder advancement groups&gt;
+ │    │   └ &lt;datapack_name&gt;.json
+ │    ├ functions
+ │    │   ├ &lt;datapack_name&gt;
+ │    │   │   ├ &lt;folder function groups&gt;
+ │    │   │   ├ main.mcfunction or tick.mcfunction
+ │    │   │   ├ setup.mcfunction or init.mcfunction
+ │    │   │   └ uninstall.function
+ │    │   └ &lt;database, random &amp; etc.&gt;
+ │    ├ loot_tables
+ │    │   └ &lt;datapack_name&gt;
+ │    │       └ &lt;loot folder groups item, block&gt;
+ │    │           └ &lt;...&gt;.json
+ │    ├ predicates
+ │    │   └ &lt;datapack_name&gt;
+ │    │       ├ &lt;folder predicate groups&gt;
+ │    │       └ &lt;...&gt;.json
+ │    ├ recipes
+ │    │   └ &lt;datapack_name&gt;
+ │    │       └ &lt;...&gt;.json
+ │    └ tags
+ │        └  &lt;items&gt;
+ │            └ &lt;datapack_name&gt;
+ │                └ &lt;...&gt;.json
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        ├ &lt;your_name&gt;.json
+ │        └ root.json
+ └ &lt;minecraft&gt;
+</code></pre>
+<p><strong>4. More facts from the perspective of convention mod</strong></p>
+<p>In datapacker circles, there are identical datapacks created by different datapackers, with the same functionality. (with different command's algorithm in different datapacker methods, but with the same result) and may be slightly different, according to the functionality and design features. </p>
+<blockquote>
+<p>Example cool stuff datapack here</p>
+<ul>
+<li><a href="https://www.planetminecraft.com/data-pack/veinminer-by-boomber/">Veinminer by Boomber</a></li>
+<li><a href="https://www.planetminecraft.com/data-pack/javd-just-another-veinminer-datapack/">VeinMiner by Gnottero</a></li>
+<li><a href="https://github.com/Elemend/Vein-Miner-Unified">Vein Miner Unified by Elemend</a></li>
+</ul>
+</blockquote>
+<p>For example, the veinminer datapack, if you use a namespace is <code>vm</code> and other datapackers use too, it's an issue.
+And not explicitly identify under the datapacker's name. Because it was not grouped or class directly under datapacker's name, which lacks flexibility and easy maintenance. </p>
+<p><strong>Note:</strong> But this is not disallowing you to use namespace as datapack name.</p>
+<pre><code>Fictitious directory example:
+
+data veinminer:main
+ ├ veinminer
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        └ convention.json
+
+data - villager_magic:main
+ ├ villager_magic
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        └ convention.json
+
+data - veinminer_faq:tick
+ ├ veinminer_faq
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        └ faq.json
+
+data - vm:tick
+ ├ vm (Virtual Magic)
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        └ faq.json
+</code></pre>
+<pre><code class="language-mcfunction">function veinminer:main
+function villager_magic:main
+function veinminer_faq:tick
+function vm:tick
+</code></pre>
+<p><strong>Or</strong></p>
+<pre><code>data - convention:veinminer/main
+ ├ convention
+ │    └ functions
+ │        └ veinminer
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        └ convention.json
+
+data - convention:villager_magic/main
+ ├ convention
+ │    └ functions
+ │        └ villager_magic
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        └ convention.json
+
+ data - faq:veinminer/tick
+ ├ faq
+ │    └ functions
+ │        └ veinminer
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        └ faq.json
+
+data - faq:virtual_magic/tick
+ ├ faq
+ │    └ functions
+ │        └ virtual_magic
+ ├ &lt;global&gt;
+ │    └ advancements
+ │        └ faq.json
+
+</code></pre>
+<pre><code class="language-mcfunction">function convention:veinminer/main
+function convention:villager_magic/main
+function faq:veinminer/tick
+function faq:virtual_magic/tick
+</code></pre>
+<p>But from the above example, which one do you think looks better? Here, I think it's better to let the user see both the creator name and the datapack name when typing the <code>/function</code> command. Instead of just the datapack name.
+I hope this helpful to you in datapacking.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../conventions/global_durability.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../conventions/shulker_box_loot_table.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../conventions/global_durability.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../conventions/shulker_box_loot_table.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

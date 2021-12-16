@@ -1,0 +1,353 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Common Trait Convention** - MC Datapacks</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Minecraft Datapacks</a></li><li class="chapter-item expanded "><a href="../conventions/index.html"><strong aria-hidden="true">1.</strong> Official Conventions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../conventions/datapack_advancement.html"><strong aria-hidden="true">1.1.</strong> Datapack Advancement*</a></li><li class="chapter-item expanded "><a href="../conventions/datapack_uninstallation.html"><strong aria-hidden="true">1.2.</strong> Datapack Uninstallation*</a></li><li class="chapter-item expanded "><a href="../conventions/common_trait.html" class="active"><strong aria-hidden="true">1.3.</strong> Common Trait Convention**</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../conventions/common_trait/examples.html"><strong aria-hidden="true">1.3.1.</strong> Examples</a></li></ol></li><li class="chapter-item expanded "><a href="../conventions/custom_model_id.html"><strong aria-hidden="true">1.4.</strong> Custom Model ID***</a></li><li class="chapter-item expanded "><a href="../conventions/global_ignoring_tag.html"><strong aria-hidden="true">1.5.</strong> Global Ignoring Tag***</a></li><li class="chapter-item expanded "><a href="../conventions/global_durability.html"><strong aria-hidden="true">1.6.</strong> Global Durability*</a></li><li class="chapter-item expanded "><a href="../conventions/namespace.html"><strong aria-hidden="true">1.7.</strong> Namespace Convention***</a></li><li class="chapter-item expanded "><a href="../conventions/shulker_box_loot_table.html"><strong aria-hidden="true">1.8.</strong> Shulker Box Loot Table***</a></li><li class="chapter-item expanded "><a href="../conventions/global_forceload_tag.html"><strong aria-hidden="true">1.9.</strong> Global Forceload Tag***</a></li></ol></li><li class="chapter-item expanded "><a href="../style_guideline/index.html"><strong aria-hidden="true">2.</strong> Style Guideline</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../style_guideline/datapack_advancement.html"><strong aria-hidden="true">2.1.</strong> Datapack Advancement</a></li><li class="chapter-item expanded "><a href="../style_guideline/datapack_uninstallation.html"><strong aria-hidden="true">2.2.</strong> Datapack Uninstallation</a></li><li class="chapter-item expanded "><a href="../style_guideline/reloading_message.html"><strong aria-hidden="true">2.3.</strong> Reloading Message</a></li></ol></li><li class="chapter-item expanded "><a href="../certified_datapacks/index.html"><strong aria-hidden="true">3.</strong> Certified Datapacks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../certified_datapacks/requirement.html"><strong aria-hidden="true">3.1.</strong> Requirement</a></li></ol></li><li class="chapter-item expanded "><a href="../tips/index.html"><strong aria-hidden="true">4.</strong> Tips</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tips/enum_scoreboard.html"><strong aria-hidden="true">4.1.</strong> Enum Scoreboard</a></li><li class="chapter-item expanded "><a href="../tips/shulker_box_inventory_manipulation.html"><strong aria-hidden="true">4.2.</strong> Shulker Box Inventory Manipulation</a></li><li class="chapter-item expanded "><a href="../tips/holding_right_click_detection.html"><strong aria-hidden="true">4.3.</strong> Holding Right Click Detection</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">MC Datapacks</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="common-trait-convention-"><a class="header" href="#common-trait-convention-">Common Trait Convention (<code>**</code>)</a></h1>
+<h2 id="about"><a class="header" href="#about">About</a></h2>
+<p>This convention is intended to bring the Ore Dictionary system from <a href="http://files.minecraftforge.net/">Forge</a> to datapack's custom items. This is done by utilizing the Item's custom NBT feature. We can insert any kind of NBT inside the Item, which we can access using other commands.</p>
+<p>With that, we can create a unified lookup system that every datapack can use to search for a specific item they want. You can then use the Common Trait Convention's provided syntax to construct a search function to find the item you need.</p>
+<h2 id="example-usage"><a class="header" href="#example-usage">Example Usage</a></h2>
+<p>It can be hard to visualize how this convention would be useful in the real world, so we compiled some useful usage that would not be possible without this convention.</p>
+<ol>
+<li>Suppose you added a <code>custom furnace</code> which let you smelt copper ore into ingots. With this convention, you can detect for <strong>any</strong> copper ore from any datapacks to smelt it.</li>
+<li>Suppose you added a <code>fridge</code> block that only accepts food items. With this convention, you can detect <strong>any</strong> food items, even the custom ones from other datapacks.</li>
+<li>Suppose you added a <code>custom anvil</code> which lets you repair tools straight from the material instead of the ingot. With this convention, you can detect <strong>any</strong> kind of material from other datapacks, even when the base material doesn't match.</li>
+</ol>
+<h2 id="traits"><a class="header" href="#traits">Traits</a></h2>
+<p>Traits represent behavior and properties that an object can have. By specifying these traits inside the item's NBT, other datapacks will be able to refer to that item via traits instead of item IDs directly.</p>
+<p>Traits are a compound tag of strings to booleans and so will look like this in NBT (notice <code>traits: {...}</code>?)</p>
+<pre><code class="language-mcfunction">/give @s diamond{ctc: {traits: {&quot;some&quot;: 1b, &quot;trait&quot;: 1b, &quot;here&quot;: 1b}, id: &quot;example&quot;, from: &quot;convention:wiki&quot;}}
+</code></pre>
+<p>Do note that there is no underlying mechanic that separates traits from any general NBT in the minecraft engine, we are creating this mechanic ourselves.</p>
+<h2 id="syntax"><a class="header" href="#syntax">Syntax</a></h2>
+<p>Common Trait Convention's syntax will be stored inside the <code>ctc</code> NBT of an item. Inside <code>ctc</code> are the NBT tags: <code>id</code>, <code>from</code> and <code>traits</code>.</p>
+<ul>
+<li><code>id</code>: The internal ID of your item. This doesn't matter outside your datapack, but <em>should</em> be unique within your datapack.</li>
+<li><code>from</code>: A namespace specifying which datapack the item comes from.</li>
+<li><code>traits</code>: A set of traits.</li>
+</ul>
+<p>For example, We will use an expanded form of the NBT used in <code>/give</code> command for readability. (but it's actually compacted into one line)</p>
+<pre><code class="language-text">/give @s minecraft:iron_ore{
+    ctc: {
+        id: &quot;my_copper_ore&quot;,
+        from: &quot;convention:wiki&quot;,
+        traits: {&quot;metal/copper&quot;: 1b, &quot;block&quot;: 1b, &quot;ore&quot;: 1b}
+    }
+} 1
+</code></pre>
+<blockquote>
+<p>Minecraft does not have a <code>set</code> data type, so we replicate it using a compound tag.
+This means every trait must have a value of <code>1b</code> or <code>true</code> to stay consistent.</p>
+</blockquote>
+<p>Let's look at these traits:</p>
+<ul>
+<li><code>metal/copper</code>. This trait tells us that this item is copper.</li>
+<li><code>block</code>. This trait tells us that this item is a placeable block.</li>
+<li><code>ore</code>. This trait tells us that this item is an ore.</li>
+</ul>
+<h3 id="note"><a class="header" href="#note">Note</a></h3>
+<ul>
+<li>When you are attempting to check for a custom item using <code>id</code> tag <strong>must</strong> be done alongside <code>from</code> tag as well, you cannot separate it because it would break compatibility.</li>
+<li>The opposite of the above is not true, you can check for <code>from</code> tag without requiring <code>id</code> tag.</li>
+<li>If you use <code>id</code> tag to check for a custom item, there is no need to check for <code>traits</code> tag as well.</li>
+</ul>
+<h2 id="slash-notation"><a class="header" href="#slash-notation">Slash Notation</a></h2>
+<p>In the above example, you will notice the use of <code>/</code> in <code>metal/copper</code>. This is used for categorization when a name alone could be ambiguous or difficult to understand. For example, what would the trait <code>orange</code> mean? Is it the <em>color</em> orange or the <em>fruit</em> orange?</p>
+<p>In such a case we'd use slash notation to separate them. <code>color/orange</code> and <code>fruit/orange</code></p>
+<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<p>To detect or check for trait items you just need to check the <code>traits</code> NBT of the item.</p>
+<blockquote>
+<p>Detect if the player is holding a weapon</p>
+</blockquote>
+<pre><code class="language-mcfunction">execute as @a if data entity @s SelectedItem.tag.ctc.traits.&quot;tool/weapon&quot; run ...
+</code></pre>
+<p>This command detects if the item the player is holding has the trait <code>tool/weapon</code>.</p>
+<hr />
+<blockquote>
+<p>Detect if the container contains copper ore</p>
+</blockquote>
+<pre><code class="language-mcfunction">execute if block ~ ~ ~ Items[].tag.ctc.traits{&quot;metal/copper&quot;: 1b, &quot;ore&quot;: 1b} run ...
+</code></pre>
+<p>This command detects if the container contains an item with the traits <code>metal/copper</code> and <code>ore</code></p>
+<hr />
+<blockquote>
+<p>Detect if the container contains a placeable item</p>
+</blockquote>
+<pre><code class="language-mcfunction">execute if block ~ ~ ~ Items[].tag.ctc.traits.&quot;block&quot; run ...
+</code></pre>
+<p>This command detects if the container contains an item with the trait <code>block</code>.</p>
+<hr />
+<blockquote>
+<p>While quotes around the trait are not necessary in all cases, I always keep them there to stay consistent.</p>
+</blockquote>
+<h2 id="basic-traits"><a class="header" href="#basic-traits">Basic Traits</a></h2>
+<p>This is a provided list of traits that you can use. This doesn't mean you can't create new traits for your own use, but if there is a trait that suits your need in the list, you should use it.</p>
+<blockquote>
+<p>The list is split into multiple groups and you <strong>should not</strong> use traits from the same group twice.</p>
+</blockquote>
+<h3 id="object-type-group"><a class="header" href="#object-type-group">Object Type Group</a></h3>
+<p>This trait represents the state of the matter that this item holds.</p>
+<table><thead><tr><th>Trait</th><th>Description</th></tr></thead><tbody>
+<tr><td>gas</td><td>Gaseous substance</td></tr>
+<tr><td>liquid</td><td>Liquid substance</td></tr>
+<tr><td>block</td><td>Placeable item</td></tr>
+<tr><td>item</td><td>Normal minecraft item</td></tr>
+</tbody></table>
+<h3 id="special-type-group"><a class="header" href="#special-type-group">Special Type Group</a></h3>
+<p>This group represents common traits from Minecraft.</p>
+<blockquote>
+<p>This group is an exception to the rule above, you can use multiple traits from this group as much as you like.</p>
+</blockquote>
+<table><thead><tr><th>Trait</th><th>Description</th></tr></thead><tbody>
+<tr><td>ore</td><td>Ore block that can usually be found in caves</td></tr>
+<tr><td>seed</td><td>Item that can be used to grow plants</td></tr>
+<tr><td>flower</td><td>Flower item</td></tr>
+<tr><td>grass</td><td>Block that can spread from one block to another</td></tr>
+<tr><td>sapling</td><td>Block that can grow into a tree</td></tr>
+<tr><td>vegetable</td><td>Food item that comes from <code>seed</code></td></tr>
+<tr><td>log</td><td>Item that drops from tree trunk</td></tr>
+<tr><td>planks</td><td>Item that comes from processing <code>log</code></td></tr>
+</tbody></table>
+<h3 id="compression-group"><a class="header" href="#compression-group">Compression Group</a></h3>
+<p>This trait represents an item that can be combined to create a more compact version of itself and vice versa.</p>
+<p>For example:</p>
+<ul>
+<li><code>redstone dust</code> -&gt; <code>redstone block</code></li>
+<li><code>ice</code> -&gt; <code>packed ice</code></li>
+<li><code>iron block</code> -&gt; <code>iron ingot</code></li>
+</ul>
+<table><thead><tr><th>Trait</th><th>Description</th></tr></thead><tbody>
+<tr><td>packed</td><td>Most packed form of item, usually a block</td></tr>
+<tr><td>ingot</td><td>Normal form of item, usually an ingot</td></tr>
+<tr><td>nugget</td><td>Smallest form of item, usually a nugget</td></tr>
+</tbody></table>
+<h3 id="edible-group"><a class="header" href="#edible-group">Edible Group</a></h3>
+<p>This trait represents an edible item that can be used by the player (drinking included).</p>
+<table><thead><tr><th>Trait</th><th>Description</th></tr></thead><tbody>
+<tr><td>food</td><td>All types of edible item</td></tr>
+</tbody></table>
+<h3 id="armor-group"><a class="header" href="#armor-group">Armor Group</a></h3>
+<p>This trait represents an item that can be worn by players and other entities.</p>
+<table><thead><tr><th>Trait</th><th>Description</th></tr></thead><tbody>
+<tr><td>armor</td><td>All types of wearable item</td></tr>
+</tbody></table>
+<h3 id="tool-sub-group"><a class="header" href="#tool-sub-group">Tool Sub-group</a></h3>
+<blockquote>
+<p>This trait uses <a href="#slash-notation">Slash Notation</a>!</p>
+</blockquote>
+<p>This trait represents an item that can be used to interact with the world.</p>
+<table><thead><tr><th>Trait</th><th>Description</th></tr></thead><tbody>
+<tr><td>tool/mining</td><td>This item can be used to mine stone-like blocks</td></tr>
+<tr><td>tool/chopping</td><td>This item can be used to cut wooden blocks</td></tr>
+<tr><td>tool/tilling</td><td>This item can be used to till soil</td></tr>
+<tr><td>tool/watering</td><td>This item can be used to water soil</td></tr>
+<tr><td>tool/weapon</td><td>This item can be used to fight monsters and other players</td></tr>
+</tbody></table>
+<h3 id="gem-sub-group"><a class="header" href="#gem-sub-group">Gem Sub-group</a></h3>
+<blockquote>
+<p>This trait uses <a href="#slash-notation">Slash Notation</a>!</p>
+</blockquote>
+<p>This trait represents any item that has a crystalline structure.</p>
+<table><thead><tr><th>Trait</th><th>Description</th></tr></thead><tbody>
+<tr><td>gem/diamond</td><td>Diamond gemstone</td></tr>
+<tr><td>gem/ruby</td><td>Ruby gemstone</td></tr>
+<tr><td>gem/emerald</td><td>Emerald gemstone</td></tr>
+<tr><td>gem/sapphire</td><td>Sapphire gemstone</td></tr>
+<tr><td>gem/prismarine</td><td>Prismarine</td></tr>
+<tr><td>gem/lapis</td><td>Lapis Lazuli gemstone</td></tr>
+<tr><td>gem/obsidian</td><td>Any Obsidian material</td></tr>
+<tr><td>gem/quartz</td><td>Any Quartz material</td></tr>
+<tr><td>gem/opal</td><td>Opal gemstone</td></tr>
+</tbody></table>
+<h3 id="metal-sub-group"><a class="header" href="#metal-sub-group">Metal Sub-group</a></h3>
+<blockquote>
+<p>This trait use <a href="#slash-notation">Slash Notation</a>!</p>
+</blockquote>
+<p>This trait represents common metallic items.</p>
+<table><thead><tr><th>Trait</th><th>Description</th></tr></thead><tbody>
+<tr><td>metal/iron</td><td>Item made up of iron</td></tr>
+<tr><td>metal/gold</td><td>Item made up of gold</td></tr>
+<tr><td>metal/copper</td><td>Item made up of copper</td></tr>
+<tr><td>metal/aluminium</td><td>Item made up of aluminium</td></tr>
+<tr><td>metal/tin</td><td>Item made up of tin</td></tr>
+<tr><td>metal/silver</td><td>Item made up of silver</td></tr>
+<tr><td>metal/lead</td><td>Item made up of lead</td></tr>
+<tr><td>metal/nickel</td><td>Item made up of nickel</td></tr>
+<tr><td>metal/platinum</td><td>Item that made up of platinum</td></tr>
+</tbody></table>
+<h2 id="reference"><a class="header" href="#reference">Reference</a></h2>
+<ul>
+<li><a href="https://mcforge.readthedocs.io/en/1.12.x/utilities/oredictionary/">Ore Dict</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../conventions/datapack_uninstallation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../conventions/common_trait/examples.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../conventions/datapack_uninstallation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../conventions/common_trait/examples.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
