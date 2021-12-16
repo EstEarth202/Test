@@ -1,0 +1,605 @@
+<!DOCTYPE HTML>
+<html lang="th" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>MC Datapacks TH</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Datapacking Technical by EstEarth</a></li><li class="chapter-item expanded "><a href="coding/tooling.html"><strong aria-hidden="true">1.</strong> Tooling</a></li><li class="chapter-item expanded "><a href="basic/index.html"><strong aria-hidden="true">2.</strong> Datapacking Basic</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic/advancement.html"><strong aria-hidden="true">2.1.</strong> Advancement</a></li><li class="chapter-item expanded "><a href="basic/function.html"><strong aria-hidden="true">2.2.</strong> Function</a></li><li class="chapter-item expanded "><a href="basic/loot_table.html"><strong aria-hidden="true">2.3.</strong> Loot table</a></li><li class="chapter-item expanded "><a href="basic/predicate.html"><strong aria-hidden="true">2.4.</strong> Predicate</a></li><li class="chapter-item expanded "><a href="basic/recipe.html"><strong aria-hidden="true">2.5.</strong> recipe</a></li><li class="chapter-item expanded "><a href="basic/tag.html"><strong aria-hidden="true">2.6.</strong> tag</a></li></ol></li><li class="chapter-item expanded "><a href="basic_more/index.html"><strong aria-hidden="true">3.</strong> Datapacking Basic +</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_more/structure.html"><strong aria-hidden="true">3.1.</strong> Structure *.nbt</a></li><li class="chapter-item expanded "><a href="basic_more/dimension_type.html"><strong aria-hidden="true">3.2.</strong> Dimension type</a></li><li class="chapter-item expanded "><a href="basic_more/dimension.html"><strong aria-hidden="true">3.3.</strong> Dimension</a></li><li class="chapter-item expanded "><a href="basic_more/world_gen.html"><strong aria-hidden="true">3.4.</strong> Worldgen</a></li></ol></li><li class="chapter-item expanded "><a href="rp_basic/index.html"><strong aria-hidden="true">4.</strong> Resource pack Basic</a></li><li class="chapter-item expanded "><a href="tip_trick/index.html"><strong aria-hidden="true">5.</strong> Tips/Tricks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tip_trick/pack_mcmeta.html"><strong aria-hidden="true">5.1.</strong> pack.mcmeta trick</a></li></ol></li><li class="chapter-item expanded "><a href="technical/index.html"><strong aria-hidden="true">6.</strong> Tecnical advice</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="technical/namespace.html"><strong aria-hidden="true">6.1.</strong> Pack Namespace</a></li><li class="chapter-item expanded "><a href="technical/structure.html"><strong aria-hidden="true">6.2.</strong> Pack file structure</a></li><li class="chapter-item expanded "><a href="technical/optimization/index.html"><strong aria-hidden="true">6.3.</strong> Pack Optimization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="technical/optimization/selector.html"><strong aria-hidden="true">6.3.1.</strong> @ selector</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">MC Datapacks TH</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#about" id="about">About</a></h1>
+<p>This page is created to <em>introduce</em>, <em>teach</em> and <em>explain good techniques</em>. To datapacking from my past experience in order to make develop and maintain better and easier in the future. Which everyone can adapt and apply Is one option<br />
+and <strong>not force</strong> it in any way.</p>
+<p>And one more purpose of <a href="./technical/index.html">Tecnical advice</a> to make it easier to follow <a href="https://mc-datapacks.github.io/th/">Official Conventions</a> make it easier to get reviews from Datapack Reviewer. This has been compiled from some of the common issues from my experiences with datapack reviews.</p>
+<p><a href="https://discord.gg/SnJQcfq">Minecraft Datapacks</a></p>
+<p><a href="https://discord.gg/KgbVpmz">Minecraft Datapacks TH</a></p>
+<h1><a class="header" href="#tooling" id="tooling">Tooling</a></h1>
+<p>This tooling is recommended by me for its datapacking convenience.</p>
+<h2><a class="header" href="#programing" id="programing">Programing</a></h2>
+<p>1.Install <a href="https://code.visualstudio.com/">VS Code</a> or <a href="https://code.visualstudio.com/insiders/">VS Code Insider</a> or <a href="https://vscodium.com/">VS Codium</a> * I use Insider</p>
+<p>2.Extensions</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=SPGoding.datapack-language-server">Data-pack Helper Plus</a> various helper functionality to navigate through datapack.</li>
+</ul>
+<p>Rough preview</p>
+<p><img src="https://raw.githubusercontent.com/SPGoding/vscode-datapack-helper-plus/master/img/simple-completions.gif" alt="alt" /></p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=arcensoth.language-mcfunction">language-mcfunction</a> This extension provides a syntax highlighting more color feedback.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=actuallyboomber.tellraw-preview">tellraw preview</a> This extension provides text preview for commands that display a message to the player.</li>
+</ul>
+<p><img src="https://i.imgur.com/9Q64XoT.png" alt="alt" /></p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors">Comment Anchors</a> Highlight comment and color mark <code>#</code> function of the <code>Data-pack Helper Plus</code>.</li>
+</ul>
+<p><img src="coding/./program/comment.png" alt="" /></p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme">Material Icon Theme</a> Change icon for pretty files. This (depends on your preference.)</li>
+</ul>
+<h2><a class="header" href="#setting" id="setting">Setting</a></h2>
+<p>If you datapacking and want the code to look like this or customize it as you like. Can be set as follows.</p>
+<p><img src="coding/./program/window.png" alt="" /></p>
+<p>0.<strong>Color Theme</strong></p>
+<ul>
+<li><code>Color Theme -&gt; Select &quot;Dark+ (default dark)&quot;</code></li>
+</ul>
+<p>1.<strong>Font</strong></p>
+<ul>
+<li>Font <a href="https://github.com/tonsky/FiraCode">Fira Code</a> (Depending on your preference, I use this font, partly because of font ligatures <code>&lt;= -&gt;</code> as in the picture and <code>@</code> is cool.)</li>
+<li>After font download and installed, set font by going to <code>Setting -&gt; Text Editor -&gt; Font -&gt; Font Family put Fira Code</code></li>
+<li>Font Ligatures (change symbol <code>&lt;=</code> <code>-&gt;</code>) -&gt; <code>Edit in settings.json</code> -&gt; <code>&quot;editor.fontLigatures&quot;: true</code></li>
+</ul>
+<p>2.<strong>Syntax Highlighting Color</strong></p>
+<ul>
+<li>From the previous verse, do not close the window settings.json</li>
+<li>You can copy and insert it (Where <code>,</code> will continue from the back <code>Editor.fontLigatures &quot;: true</code>)</li>
+<li>Want to customize more <a href="https://github.com/SPGoding/datapack-language-server/wiki/Semantic-Tokens">here</a></li>
+</ul>
+<pre><code class="language-json">    ,
+    &quot;editor.semanticTokenColorCustomizations&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;rules&quot;: {            
+            &quot;literal&quot;: &quot;#ffffff&quot;,
+            &quot;*.firstArgument&quot;: &quot;#c986c4&quot;,
+            &quot;*.declaration&quot;: {
+                &quot;fontStyle&quot;: &quot;italic&quot;,
+            },
+            &quot;identity&quot;: &quot;#f1bf74&quot;,
+            &quot;operator&quot;: &quot;#da4545&quot;,
+            &quot;boolean&quot;: &quot;#bcdf6c&quot;,
+            &quot;property&quot;: &quot;#81c0fa&quot;,
+            &quot;string&quot;: &quot;#bcdf6c&quot;,
+            &quot;*.inString&quot;: {
+                &quot;fontStyle&quot;: &quot;&quot;
+            },
+            &quot;type&quot;: &quot;#ff6ec3&quot;,
+            &quot;variable&quot;: &quot;#e19178&quot;,
+            &quot;vector&quot;: &quot;#00ffffde&quot;,
+        }
+    },
+    &quot;workbench.colorCustomizations&quot;: {
+        &quot;statusBar.background&quot;: &quot;#16825d&quot;,
+        &quot;statusBarItem.remoteBackground&quot;: &quot;#3ea8ff&quot;
+    }
+</code></pre>
+<p>3.<strong>Highlighting Commment</strong> (You can add after <code>}</code> in verse 2)</p>
+<pre><code class="language-json">    ,
+    &quot;commentAnchors.tags.list&quot;: [   
+
+        {
+            &quot;tag&quot;: &quot;ANCHOR&quot;,
+            &quot;iconColor&quot;: &quot;default&quot;,
+            &quot;highlightColor&quot;: &quot;#A8C023&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;enabled&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;TODO&quot;,
+            &quot;iconColor&quot;: &quot;blue&quot;,
+            &quot;highlightColor&quot;: &quot;#3ea8ff&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;enabled&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;FIXME&quot;,
+            &quot;iconColor&quot;: &quot;red&quot;,
+            &quot;highlightColor&quot;: &quot;#F44336&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;enabled&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;STUB&quot;,
+            &quot;iconColor&quot;: &quot;purple&quot;,
+            &quot;highlightColor&quot;: &quot;#BA68C8&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;enabled&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;NOTE&quot;,
+            &quot;iconColor&quot;: &quot;orange&quot;,
+            &quot;highlightColor&quot;: &quot;#FFB300&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;enabled&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;REVIEW&quot;,
+            &quot;iconColor&quot;: &quot;green&quot;,
+            &quot;highlightColor&quot;: &quot;#64DD17&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;enabled&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;SECTION&quot;,
+            &quot;iconColor&quot;: &quot;blurple&quot;,
+            &quot;highlightColor&quot;: &quot;#896afc&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;behavior&quot;: &quot;region&quot;,
+            &quot;enabled&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;LINK&quot;,
+            &quot;iconColor&quot;: &quot;#2ecc71&quot;,
+            &quot;highlightColor&quot;: &quot;#2ecc71&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;behavior&quot;: &quot;link&quot;,
+            &quot;enabled&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;define&quot;,
+            &quot;highlightColor&quot;: &quot;#BA68C8&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;isItalic&quot;: false
+        },        
+        {
+            &quot;tag&quot;: &quot;alias&quot;,
+            &quot;highlightColor&quot;: &quot;#7c6afb&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;isItalic&quot;: false,
+        },
+        {
+            &quot;tag&quot;: &quot;declare&quot;,
+            &quot;highlightColor&quot;: &quot;#d55462&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;isItalic&quot;: false,
+        },
+        {
+            &quot;tag&quot;: &quot;#&gt;&quot;,
+            &quot;highlightColor&quot;: &quot;#A8C023&quot;,           
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;isItalic&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;# @&quot;,
+            &quot;highlightColor&quot;: &quot;#469fe3&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;isItalic&quot;: false
+        },
+        {
+            &quot;tag&quot;: &quot;# &quot;,
+            &quot;highlightColor&quot;: &quot;#2ecc71&quot;,
+            &quot;scope&quot;: &quot;file&quot;,
+            &quot;isItalic&quot;: false
+        }
+    ],
+    &quot;commentAnchors.tags.matchCase&quot;: false,
+    &quot;commentAnchors.tags.separators&quot;: [
+        &quot; - &quot;,
+        &quot;: &quot;,
+        &quot;&quot;
+    ]
+</code></pre>
+<h2><a class="header" href="#note" id="note">Note</a></h2>
+<p>The reason for setting such as ANCHOR, TODO, SECTION to false is because it is the default of the extension that produces the same word highlight.</p>
+<h1><a class="header" href="#datapacking-basic" id="datapacking-basic">Datapacking Basic</a></h1>
+<p>This section is for teaching how to write a data pack. To get to know and understand each part at the introductory level.</p>
+<h1><a class="header" href="#advancement" id="advancement">Advancement</a></h1>
+<h1><a class="header" href="#function" id="function">Function</a></h1>
+<h1><a class="header" href="#loot-table" id="loot-table">Loot table</a></h1>
+<h1><a class="header" href="#predicate" id="predicate">Predicate</a></h1>
+<h1><a class="header" href="#recipe" id="recipe">recipe</a></h1>
+<h1><a class="header" href="#tag" id="tag">tag</a></h1>
+<h1><a class="header" href="#datapacking-basic-" id="datapacking-basic-">Datapacking Basic +</a></h1>
+<p>In the process of maintenance.</p>
+<h1><a class="header" href="#structure-nbt" id="structure-nbt">Structure *.nbt</a></h1>
+<p>In the process of maintenance.</p>
+<h1><a class="header" href="#dimension-type" id="dimension-type">Dimension type</a></h1>
+<p>In the process of maintenance.</p>
+<h1><a class="header" href="#dimension" id="dimension">Dimension</a></h1>
+<p>In the process of maintenance.</p>
+<h1><a class="header" href="#world-gen" id="world-gen">World Gen</a></h1>
+<p>In the process of maintenance.</p>
+<h1><a class="header" href="#resource-pack-basic" id="resource-pack-basic">Resource pack basic</a></h1>
+<p>In the process of maintenance.</p>
+<h1><a class="header" href="#tip-n-trick" id="tip-n-trick">Tip n Trick</a></h1>
+<p>Give me tips and tricks based on my experience and use.</p>
+<h1><a class="header" href="#packmcmeta-trick" id="packmcmeta-trick">pack.mcmeta trick</a></h1>
+<h1><a class="header" href="#about-1" id="about-1">about</a></h1>
+<p>It is a gimmick that you can use.</p>
+<h1><a class="header" href="#implementation" id="implementation">Implementation</a></h1>
+<p><code>pack.mcmeta</code> also support JSON Text Component. 
+Which can be applied to <code>Advancement</code> too.</p>
+<h2><a class="header" href="#type-1" id="type-1">Type 1</a></h2>
+<pre><code class="language-json">{
+	&quot;pack&quot;: {
+		&quot;pack_format&quot;: 6,
+		&quot;description&quot;: [
+			{
+				&quot;text&quot;: &quot;verrion: 1.1.8\n&quot;,
+				&quot;color&quot;: &quot;gold&quot;
+			},
+			{
+				&quot;text&quot;: &quot;dates: July 2020\n&quot;
+			},
+			{
+				&quot;text&quot;: &quot;author: EstEarth&quot;
+			}
+		]
+	}
+}
+</code></pre>
+<p><img src="tip_trick/./pack/1.png" alt="" /></p>
+<p>If you add <code>description '': [&quot;&quot;, {</code> the bottom two lines will become the default color.</p>
+<p><img src="tip_trick/./pack/1_1.png" alt="" /></p>
+<h2><a class="header" href="#type-2" id="type-2">Type 2</a></h2>
+<pre><code class="language-json">{
+    &quot;pack&quot;: {
+        &quot;pack_format&quot;: 6,
+        &quot;description&quot;: [
+            {
+                &quot;text&quot;: &quot;verrion: 1.1.8\n&quot;,
+                &quot;color&quot;: &quot;dark_purple&quot;
+            },
+            {
+                &quot;text&quot;: &quot;dates: July 2020\n&quot;,
+                &quot;color&quot;: &quot;#6600ff&quot;
+            },
+            {
+                &quot;text&quot;: &quot;author: EstEarth&quot;,
+				&quot;color&quot;: &quot;gold&quot;,
+				&quot;font&quot;: &quot;alt&quot;
+            }
+        ]
+    }
+}
+</code></pre>
+<p><img src="tip_trick/./pack/2.png" alt="" /></p>
+<p>For game version 1.16+ You can use <em>HEX</em> color value and <em>Custom Font</em> with <em>Resource pack</em>.</p>
+<h2><a class="header" href="#example-of-use-for-advancement" id="example-of-use-for-advancement">Example of use for Advancement</a></h2>
+<pre><code class="language-json">{
+	&quot;display&quot;: {
+		&quot;title&quot;: {
+			&quot;text&quot;: &quot;      Est Clock Utility      &quot;,
+			&quot;color&quot;: &quot;yellow&quot;
+		},
+		&quot;description&quot;: [
+			{
+				&quot;text&quot;: &quot;Clock Day, &quot;,
+				&quot;color&quot;: &quot;green&quot;
+			},
+			{
+				&quot;text&quot;: &quot;Time, &quot;,
+				&quot;color&quot;: &quot;yellow&quot;
+			},
+			{
+				&quot;text&quot;: &quot;Weather, &quot;,
+				&quot;color&quot;: &quot;dark_aqua&quot;
+			},
+			{
+				&quot;text&quot;: &quot;Place characteristics, &quot;,
+				&quot;color&quot;: &quot;aqua&quot;
+			},
+			{
+				&quot;text&quot;: &quot;Moon, &quot;,
+				&quot;color&quot;: &quot;gray&quot;
+			},
+			{
+				&quot;text&quot;: &quot;Biomes&quot;,
+				&quot;color&quot;: &quot;green&quot;
+			}
+		],
+		&quot;icon&quot;: {
+			&quot;item&quot;: &quot;minecraft:clock&quot;
+		},
+		&quot;announce_to_chat&quot;: false,
+		&quot;show_toast&quot;: false
+	},
+	&quot;parent&quot;: &quot;global:estearth&quot;,
+	&quot;criteria&quot;: {
+		&quot;trigger&quot;: {
+			&quot;trigger&quot;: &quot;minecraft:tick&quot;
+		}
+	}
+}
+</code></pre>
+<p><img src="tip_trick/./pack/3.png" alt="" /></p>
+<h2><a class="header" href="#note-1" id="note-1">Note</a></h2>
+<p><code>\n</code> is for the new line. Recommend to put it behind the code pattern is more beautiful. If you put it in front of <code>n</code>, it will be attached to another text.</p>
+<h1><a class="header" href="#technical-advice" id="technical-advice">Technical Advice</a></h1>
+<p>This section is to give you the recommended techniques. For those who want to get <code>certified datapack✔️</code> &amp; <code>stamp of quality💕</code> and little funny final comment from <em>Datapack Reviewer EstEarth202👍</em> with <code>LOL</code> or <code>LMAO</code> or maybe a special comment.</p>
+<p>This has been compiled from some of the common issues from my experiences with datapack reviews.</p>
+<h2><a class="header" href="#ps" id="ps">P.S.</a></h2>
+<p>I'm not saying this technique is the best, but for me, I understand how good it is.</p>
+<p>That being said, <strong>not force</strong>, that's one of the respect I have to offer</p>
+<p>If you can understand it, it means that I have been successful in spreading my experience.</p>
+<p>I once thought I would stop making such suggestions. But Professor Boomber encouraged me.</p>
+<p><strong>Boomber:</strong> Personally, I think you should keep giving your advice. There will be someone like this sometime but most of the time your advice will be very beneficial to the datapacker. You shouldn't let one negative comment affect you.</p>
+<p>So I keep doing it. And hope you understand what I have given you.</p>
+<h1><a class="header" href="#datapack-namespacing" id="datapack-namespacing">Datapack Namespacing</a></h1>
+<h2><a class="header" href="#about-2" id="about-2">About</a></h2>
+<p>There are a few issues with using namespaces regarding the <a href="technical/./structure.html">pack file structure</a> and follow <a href="https://mc-datapacks.github.io/en/conventions/datapack_advancement.html">Datapack Advancement</a>, this is my recommended technique.</p>
+<h2><a class="header" href="#multiple-packs" id="multiple-packs">Multiple packs</a></h2>
+<p><strong>Issue:</strong> Some packs use the <code>datapack_name</code> as their namespace.</p>
+<p><strong>Sub Issue:</strong> If you follow Datapack Advancement with defines 3 advancement nodes: <code>Root</code>, <code>Namespace</code> and <code>Datapack</code>.</p>
+<p>And because datapack node <strong>must not</strong> be in <code>/data/global/advancements/folder</code>. </p>
+<p>Causing the need to take this file to <code>/data/&lt;namespace&gt;/advancements/</code></p>
+<p>It became like this <code>/data/&lt;datapack_name&gt;/advancements/&lt;datapack_name&gt;.json</code></p>
+<h3><a class="header" href="#solution" id="solution">Solution</a></h3>
+<p><strong>Fact:</strong> It's creator name.</p>
+<pre><code>data
+ ├ &lt;namespace&gt; &lt;- It doesn't make sense to set it as datapack_name.
+ │    ╰ advancements         
+ │        ╰ &lt;datapack_name&gt;.json
+ ├ &lt;global&gt;
+ │    ╰ advancements
+ │        ├ &lt;namespace&gt;.json &lt;- &quot;This is creator_head&quot; * That's why
+ │        ╰ root.json
+</code></pre>
+<p><strong>Because:</strong> If creator plan to write more datapacks, it will be very helpful when you work on workspace.</p>
+<p><img src="technical/./namespace/1.png" alt="" /></p>
+<p><strong>Result:</strong> <code>&lt;creator_name&gt;:&lt;datapack_name&gt;</code> When there are multiple packs, the name on front is to identify who created it and next it to tell what datapack it is. This will be explained further in <a href="technical/./structure.html">Pack file structure</a></p>
+<p><strong>Example pack:</strong> All <a href="https://www.planetminecraft.com/member/boomber360/">Boomber360</a>'s project.</p>
+<h2><a class="header" href="#standalone-pack" id="standalone-pack">Standalone pack</a></h2>
+<p>That means you can only do 1 pack, not do more, or combine everything in 1 pack.</p>
+<p><strong>Fact:</strong> Completely free with namespaces.</p>
+<pre><code>data
+ ├ &lt;namespace&gt; &lt;- It make sense to set it as datapack_name.
+ │    ╰ &lt;...&gt;
+ ├ &lt;global&gt;
+ │    ╰ advancements
+ │        ├ standalone 
+ │        │    ╰ &lt;datapack_node&gt;.json &lt;- &quot;This is datapack node&quot; * That's why completely free.
+ │        ╰ root.json
+</code></pre>
+<p><strong>Because:</strong> There is no more than 1 pack in your project.</p>
+<p><strong>Result:</strong> <code>&lt;datapack_name&gt;:&lt;every_internal_function&gt;</code> When there is 1 pack, which you may name it with, the <code>creator_name</code> and <code>datapack_name</code> mix or whatever. And everything under that name does not need to be identified. <code>&lt;datapack_name&gt;</code>, which makes you know exactly what this pack is, what functionality it comes from and who made it.</p>
+<p><strong>Example pack:</strong> <a href="https://www.planetminecraft.com/data-pack/the-creeper-s-code/">The Creeper's Code</a></p>
+<h2><a class="header" href="#scoreboard" id="scoreboard">Scoreboard</a></h2>
+<p><strong>Issue:</strong> Some packs use the <code>datapack_name</code> as their shortened namespace.</p>
+<p><strong>Sub Issue:</strong> Suppose the pack <code>Bounce block</code> uses objective as <code>bb.var</code>.
+Do you see the problem?</p>
+<p>What If <code>bb</code> is the namespace which is shortened from <code>boomber</code>.
+That's the problem.</p>
+<p><strong>Advice</strong>: Use namespace shortened from <em>your name</em> or <em>pen name</em>. If possible, short 2 characters due to 16 characters limitation.</p>
+<p><strong>Fact:</strong> Namespace conflicts can arise. But you can avoid it as much as possible.</p>
+<p><strong>Because:</strong> Static namespaces that are easier to control. Making it possible to eliminate the above problems.</p>
+<p><strong>Result:</strong> In all possibilities, It might give you a limit to tell what the objective is doing. But if managed well, you will be able to use a common objective for many tasks, not including the long-named fake_player scoreboard. If you name the objective well, fake_player will help you here.</p>
+<p><strong>Did you know</strong>: <code>fake_player</code> doesn't need to use namespace because it is already inside the objective namespace. <code>#</code><del><code>ee</code></del><code>.foo.bar ee.data</code></p>
+<h2><a class="header" href="#tag-1" id="tag-1">/tag</a></h2>
+<p><strong>Advice</strong>: If possible, include a full name. <code>tag @s add estearth.foo.bar</code></p>
+<p><strong>Because:</strong> It reduces the chance of conflicts from the length of the explicit name.</p>
+<h2><a class="header" href="#storage" id="storage">Storage</a></h2>
+<p>If let me advice, I hope this section will be useful to uninstall.</p>
+<p><strong>Advice</strong>: <code>estearth:&lt;datapack_name&gt; ee.&lt;path_storage_name&gt;</code> </p>
+<p><strong>Because:</strong> If you are using a Namespace, you can remove storage with a single command. Ex.: <code>data remove storage estearth:&lt;datapack_name&gt; ee</code>.</p>
+<p><strong>What if:</strong> If it's a standalone pack, an ex. from The Creeper's Code pack is interesting.
+<code>tcc:storage root.&lt;path_storage&gt;</code></p>
+<h1><a class="header" href="#datapack-file-structure" id="datapack-file-structure">Datapack file structure</a></h1>
+<h2><a class="header" href="#about-3" id="about-3">About</a></h2>
+<p>For example, one of the beautiful file structures is easy to organize and group. Easy to read, develop and maintain.</p>
+<h2><a class="header" href="#examples-are-possible-in-each-case" id="examples-are-possible-in-each-case">Examples are possible in each case.</a></h2>
+<h3><a class="header" href="#multiple-packs-1" id="multiple-packs-1">Multiple packs</a></h3>
+<h3><a class="header" href="#standalone-pack-1" id="standalone-pack-1">Standalone pack</a></h3>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
