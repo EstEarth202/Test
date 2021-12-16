@@ -77,7 +77,7 @@ However, for example, setting `"replace"` to `true` in the `tick.json` function 
 - **Cause:** use namespaces as datapack names and follow [3. Datapack Advancement](../conventions/datapack_advancement.md) the advancement *should* be inside `/data/<namespace>/advancements/<datapack name>.json`.
 - **Issue:** `/data/<datapack_name>/advancements/<datapack_name>.json`
 
-<div style="margin-left:30px;">
+<div style="margin-left:35px;">
 
 ```
 data
@@ -95,14 +95,14 @@ data
 - **Because:** you have more than one datapack under the namespace, it will be very helpful when you work on workspace. ![](./namespace/workspace.png)
 - **Result:** `<creator_name>:<datapack_name>` prefix is to identify who created it and suffix to tell about datapack. This will be explained further in [Directories guideline](#directories-guideline)
 
-**1.2 Scoreboards and teams:** 1.17 and below
+**1.2 Scoreboards and teams:** (1.17 and below)
 
 - **Shouldn't:** use shortened prefix as datapack name.
 - **Cause:** suppose datapack `Bounce block` uses objective as `bb.var`.
 - **Result:** if `bb` is shortened prefix from `boomber`. It can be an issue.
 - **Please note:** It is difficult to verify this. This makes it inconvenient for the reviewer, and therefore cannot guarantee that certified datapacks will not cause scoreboard conflicts.
 
-**1.3 Scoreboards and teams:** 1.18 and higher **Tags: 1.13 and higher**
+**1.3 Scoreboards and teams:** (1.18 and higher) | **Tags:** (1.13 and higher)
 
 - **Should:** use a full prefix.
 
@@ -126,7 +126,7 @@ data
  ├ <global>
  │    └ advancements
  │        ├ standalone 
- │        │    └ <datapack_node>.json <- "This is datapack node" * That's why completely free.
+ │        │    └ <datapack_node>.json <- This is datapack node, that's why completely free.
  │        └ root.json
 ```
 
