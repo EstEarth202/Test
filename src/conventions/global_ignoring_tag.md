@@ -89,7 +89,8 @@ kill @e[scores={faq.pass=1}]
 ```mcfunction
 execute as @e[tag=!global.ignore] run function dp:example/kill
 
-dp:example/kill -> kill @s[tag=!global.ignore.kill]
+#> dp:example/kill 
+kill @s[tag=!global.ignore.kill]
 ```
 
 > Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in `@s` it works normally. ( ** )
