@@ -50,55 +50,56 @@ The convention only applies if your function will affect an unknown entity. If y
 
 ### **Additional Implementation Guideline (Optional)**
 
-1. You don't want anyone to kill your entity. But there's no problem if it moves.
+#### 1. You don't want anyone to kill your entity. But there's no problem if it moves.
+
 ```mcfunction
 summom zombie ~ ~ ~ {Tags:["dp.example", "global.ignore", "global.ignore.kill"]}
 ```
-2. This entity not use global ignoring tag since this is a temporary entity that is killed off right away.
+
+> Remove global ignoring tag with `@e[tag=dp.example]` after done using it.
+
+#### 2. This entity not use global ignoring tag since this is a temporary entity that is killed off right away.
 ```mcfunction
-summom marker ~ ~ ~ {Tags: ["dp.example"], Age: 0, Duration: 1}
+summom area_effect_cloud ~ ~ ~ {Tags: ["dp.example"], Age: 0, Duration: 1}
 
 kill @e[tag=dp.example]
 ```
-3. This is a "chunk marker" entity that shouldn't be move or kill by other datapack, so this entity must have all global ignoring tag.
+
+#### 3. This is a "chunk marker" entity that shouldn't be move or kill by other datapack, so this entity must have all global ignoring tag.
 ```mcfunction
-summom marker ~ ~ ~ {Tags: `[ "dp.example", "global.ignore", "global.ignore.pos", "global.ignore.kill" ]`, Age: 0, Duration: 2147483647}
+summom marker ~ ~ ~ {Tags: [ "dp.example", "global.ignore", "global.ignore.pos", "global.ignore.kill" ]}
 ```
-4. If you don't want the command to execute due entity `global.ignore` is in an area, 
+
+#### 4. If you don't want the command to execute because the area contains a global ignoring tag. 
 ```mcfunction
 execute if entity @e[tag=!global.ignore,distance=..30]
 execute unless entity @e[tag=global.ignore,distance=..30]
 ```
 
-> **Q :** I can use 'global.ignore' to tag my entities. But how do I remove it after using it?
-> 
-> **A :** You can tag it with your own tag (`["global.ignore", "owner.tag"]`) and then remove with `@e[tag=owner.tag]`
-
-**Q :** Can I use score to filter `!global.ignore`?
-such as 
+#### 5. Use score to filter global ignoring tag. ( * )
 ```mcfunction
 scoreboard players set @e[tag=!global.ignore.kill] faq.pass 1
 kill @e[scores={faq.pass=1}]
 ```
-- **A :** Yes, you can. But you need to make sure that your score isn't altered in any other way that you might do accidentally.
 
-> - **Q :** If I'm not sure any `@s` has `!global.ignore` filtering at entry selector, can I use in `@s` instead?
-> - **A :** Yes, you can. But don't worry, I can check it. And in some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in `@s` it works normally, you can consider use this method. Which you can note on why you use it before I'll review it. This is because in practice, use global ignoring tags at entry selectors results in less tag usage.
->```mcfunction
-> # Examples of usage found
-> # Pragmatic
-> execute as @e[tag=!global.ignore,tag=!global.ignore.kill] run function <...>
->   ├ kill @s
->   ├ kill @s
->   ╰ Kill @s
->
-> # Use in @s
-> > execute as @e[tag=!global.ignore] run function <...>
->   ├ kill @s[tag=!global.ignore.kill]
->   ├ kill @s[tag=!global.ignore.kill]
->   ╰ Kill @s[tag=!global.ignore.kill]
-> # From this situation it was found that before kill command, there are some commands that must execute with tagged entities global.ignore.kill. But there were no kills in any of the commands at that point.
->```
+> This method may be useful in some situations. ( ** )
+
+#### 6. Use in @s ( * )
+
+```mcfunction
+execute as @e[tag=!global.ignore] run function dp:example/kill
+
+dp:example/kill -> kill @s[tag=!global.ignore.kill]
+```
+
+> Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in `@s` it works normally. ( ** )
+
 
 > - **Q:** Can I just only have `!global.ignore` in the `kill`, `tp` command? Because if that entity has `[ "faq.maker", "global.ignore", "global.ignore.pos", "global.ignore.kill" ]` it won't be selected anyway. 
 > - **A:** Will be exempt in cases where **# Use in @s** is true but shouldn't. Because if there is any issue in the future, we cannot ignore it. But don't worry, we'll review and clarify for you.
+
+> **Note**
+> - ( * ) : **Not recommended if you are unsure.**
+> - ( ** ) : Be careful, man in the middle. 
+
+But you need to make sure that your score isn't altered in any other way that you might do accidentally.
