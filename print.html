@@ -725,7 +725,7 @@ However, for example, setting <code>&quot;replace&quot;</code> to <code>true</co
 <li><strong>Cause:</strong> use namespaces as datapack names and follow <a href="conventions/../conventions/datapack_advancement.html">3. Datapack Advancement</a> the advancement <em>should</em> be inside <code>/data/&lt;namespace&gt;/advancements/&lt;datapack name&gt;.json</code>.</li>
 <li><strong>Issue:</strong> <code>/data/&lt;datapack_name&gt;/advancements/&lt;datapack_name&gt;.json</code></li>
 </ul>
-<div style="margin-left:30px;">
+<div style="margin-left:35px;">
 <pre><code>data
  ├ &lt;namespace&gt; &lt;- It doesn't make sense to set it as datapack_name.
  │    └ advancements         
@@ -741,14 +741,14 @@ However, for example, setting <code>&quot;replace&quot;</code> to <code>true</co
 <li><strong>Because:</strong> you have more than one datapack under the namespace, it will be very helpful when you work on workspace. <img src="conventions/./namespace/workspace.png" alt="" /></li>
 <li><strong>Result:</strong> <code>&lt;creator_name&gt;:&lt;datapack_name&gt;</code> prefix is to identify who created it and suffix to tell about datapack. This will be explained further in <a href="conventions/namespace.html#directories-guideline">Directories guideline</a></li>
 </ul>
-<p><strong>1.2 Scoreboards and teams:</strong> 1.17 and below</p>
+<p><strong>1.2 Scoreboards and teams:</strong> (1.17 and below)</p>
 <ul>
 <li><strong>Shouldn't:</strong> use shortened prefix as datapack name.</li>
 <li><strong>Cause:</strong> suppose datapack <code>Bounce block</code> uses objective as <code>bb.var</code>.</li>
 <li><strong>Result:</strong> if <code>bb</code> is shortened prefix from <code>boomber</code>. It can be an issue.</li>
 <li><strong>Please note:</strong> It is difficult to verify this. This makes it inconvenient for the reviewer, and therefore cannot guarantee that certified datapacks will not cause scoreboard conflicts.</li>
 </ul>
-<p><strong>1.3 Scoreboards and teams:</strong> 1.18 and higher <strong>Tags: 1.13 and higher</strong></p>
+<p><strong>1.3 Scoreboards and teams:</strong> (1.18 and higher) | <strong>Tags:</strong> (1.13 and higher)</p>
 <ul>
 <li><strong>Should:</strong> use a full prefix.</li>
 </ul>
@@ -768,7 +768,7 @@ However, for example, setting <code>&quot;replace&quot;</code> to <code>true</co
  ├ &lt;global&gt;
  │    └ advancements
  │        ├ standalone 
- │        │    └ &lt;datapack_node&gt;.json &lt;- &quot;This is datapack node&quot; * That's why completely free.
+ │        │    └ &lt;datapack_node&gt;.json &lt;- This is datapack node, that's why completely free.
  │        └ root.json
 </code></pre>
 <ul>
