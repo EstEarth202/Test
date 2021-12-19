@@ -274,6 +274,64 @@ If you are working on a project with multiple people you can choose to:</p>
 <p>There are no rules enforcing how you should implement the uninstallation method, as long as you do implement it. However, the following section outlines one of the many ways to implement it.</p>
 <h3 id="uninstallation-function"><a class="header" href="#uninstallation-function">Uninstallation Function</a></h3>
 <p>You can create an &quot;uninstallation function&quot;, which when ran, will remove most of the content added from your datapack. You can tell the user about this function inside your project page or anywhere you like.</p>
+<hr />
+<h3 id="additional-installation--uninstallation-guideline-optional"><a class="header" href="#additional-installation--uninstallation-guideline-optional"><strong>Additional Installation &amp; Uninstallation Guideline (Optional)</strong></a></h3>
+<h4 id="1-scoreboards-storages-or-teams-should-be-removed"><a class="header" href="#1-scoreboards-storages-or-teams-should-be-removed"><strong>1. scoreboards, storages, or teams, should be removed.</strong></a></h4>
+<blockquote>
+<p>In a situation that you cannot remove them, you should includes the reason in the <a href="https://github.com/mc-datapacks/review-tracker/issues">request review</a> or mcfunction comment.</p>
+</blockquote>
+<h4 id="2-only-use-loadjson"><a class="header" href="#2-only-use-loadjson"><strong>2. Only use <code>load.json</code></strong></a></h4>
+<p>The <code>tick.json</code> file typically runs before <code>load.json</code>, sometimes resulting in an incomplete installation. You can avoid that by making the init file to run before the tick function.</p>
+<pre><code class="language-json">{
+    &quot;values&quot;: [
+        &quot;dp:example/setup&quot;,
+        &quot;dp:example/main&quot;
+    ]
+}
+</code></pre>
+<pre><code class="language-mcfunction">#&gt; dp:example/main
+schedule function dp:example/main 1t
+</code></pre>
+<blockquote>
+<p>This command makes this file run every single tick just like using <code>tick.json</code>. </p>
+<p>You can make mcfunction run slower tick cycles as you like. For example</p>
+<ul>
+<li>Every 8 tick <code>schedule function &lt;function&gt; 8t</code> </li>
+<li>Every 1 second <code>schedule function &lt;function&gt; 20t or 1s</code> </li>
+<li><em>t = tick</em>, <em>s = second</em>, <em>d = gameday</em>.</li>
+</ul>
+</blockquote>
+<h4 id="3-users-should-install-zip-files-only"><a class="header" href="#3-users-should-install-zip-files-only"><strong>3. Users should install zip files only.</strong></a></h4>
+<p>For a better user experience, just drag it into the datapack folder. But there are things to be careful.</p>
+<pre><code class="language-mcfunction">#&gt; dp:example/uninstall
+
+# Use for datapacking or debugging by the owner.
+datapack disable &quot;file/example&quot;
+
+# Use for uninstalling by the user.
+datapack disable &quot;file/example.zip&quot;
+</code></pre>
+<blockquote>
+<ul>
+<li>Users are strictly prohibited from renaming files. Otherwise, when uninstalling, this command will fail.</li>
+</ul>
+</blockquote>
+<h4 id="4-uninstallation-with-schedule-clear-function-command-is-not-recommended"><a class="header" href="#4-uninstallation-with-schedule-clear-function-command-is-not-recommended"><strong>4. Uninstallation with /schedule clear &lt;function&gt; command is not recommended</strong></a></h4>
+<p>Because these problems cause inconvenience and need to be more careful.</p>
+<blockquote>
+<ul>
+<li>If you have many schedule functions, you must complete all schedule clear commands.</li>
+<li>There must be no reload after all schedule clear until the datapack file is removed.</li>
+</ul>
+</blockquote>
+<h3 id="note-1"><a class="header" href="#note-1"><strong>Note</strong></a></h3>
+<p><strong>Why is it recommended to use the datapack disable command?</strong></p>
+<ul>
+<li>If you use <code>tick.json</code> even if you remove your scoreboards, storages, or teams, this file will still be working.</li>
+<li>If you use <code>load.json</code> and <code>schedule function 1t</code>, it will be issues in section 4.</li>
+<li>Automatic reload without <code>/reload</code>. This command doesn't work with some server launchers.</li>
+<li>The <code>datapack disable</code> command there is a downside to being careful about zip file names. But this command will completely disable both methods above.</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="common-trait-convention-"><a class="header" href="#common-trait-convention-">Common Trait Convention (<code>**</code>)</a></h1>
 <h2 id="about-3"><a class="header" href="#about-3">About</a></h2>
 <p>This convention is intended to bring the Ore Dictionary system from <a href="http://files.minecraftforge.net/">Forge</a> to datapack's custom items. This is done by utilizing the Item's custom NBT feature. We can insert any kind of NBT inside the Item, which we can access using other commands.</p>
@@ -317,7 +375,7 @@ This means every trait must have a value of <code>1b</code> or <code>true</code>
 <li><code>block</code>. This trait tells us that this item is a placeable block.</li>
 <li><code>ore</code>. This trait tells us that this item is an ore.</li>
 </ul>
-<h3 id="note-1"><a class="header" href="#note-1">Note</a></h3>
+<h3 id="note-2"><a class="header" href="#note-2">Note</a></h3>
 <ul>
 <li>When you are attempting to check for a custom item using <code>id</code> tag <strong>must</strong> be done alongside <code>from</code> tag as well, you cannot separate it because it would break compatibility.</li>
 <li>The opposite of the above is not true, you can check for <code>from</code> tag without requiring <code>id</code> tag.</li>
@@ -561,7 +619,7 @@ You are <strong>not</strong> required to correctly set the traits of your custom
     ]
 }
 </code></pre>
-<h2 id="note-2"><a class="header" href="#note-2">Note</a></h2>
+<h2 id="note-3"><a class="header" href="#note-3">Note</a></h2>
 <p>This convention does not enforce any restrictions from the 8th digit onwards. Datapackers could utilize this to gain a few more model slots if they wanted to. (the digit index is count from right-to-left of course)</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="global-ignoring-tag-"><a class="header" href="#global-ignoring-tag-">Global Ignoring Tag (<code>***</code>)</a></h1>
 <h2 id="about-5"><a class="header" href="#about-5">About</a></h2>
@@ -589,7 +647,7 @@ You are <strong>not</strong> required to correctly set the traits of your custom
 <blockquote>
 <p>This tag does not apply to player-only selectors (<code>@a</code>, <code>@e[type=player]</code>, <code>@p</code>, etc.)</p>
 </blockquote>
-<h2 id="note-3"><a class="header" href="#note-3">Note</a></h2>
+<h2 id="note-4"><a class="header" href="#note-4">Note</a></h2>
 <p>The convention only applies if your function will affect an unknown entity. If you are trying to target a known entity (e.g. an entity with a special tag attached specific to your datapack), you don't need to follow this convention.</p>
 <hr />
 <h3 id="additional-implementation-guideline-optional"><a class="header" href="#additional-implementation-guideline-optional"><strong>Additional Implementation Guideline (Optional)</strong></a></h3>
@@ -671,7 +729,7 @@ tp @s ~ ~ ~
 <blockquote>
 <p>Reviewer may not be very strict, Because there is a reason in section 8. ( *** )</p>
 </blockquote>
-<h3 id="note-4"><a class="header" href="#note-4"><strong>Note</strong></a></h3>
+<h3 id="note-5"><a class="header" href="#note-5"><strong>Note</strong></a></h3>
 <ul>
 <li>( * ) : <strong>Not recommended.</strong></li>
 <li>( ** ) : <strong>Be careful</strong></li>
@@ -698,13 +756,13 @@ tp @s ~ ~ ~
 <li><code>durability</code> is the maximum durability of the tool or the maximum damage the tool can take.</li>
 <li><code>broken</code> is a boolean specifying whether the item is &quot;broken&quot; (i.e. <a href="https://minecraft.gamepedia.com/Elytra">Broken Elytra</a>). This tag can be used in the case where you don't want to destroy the item when it runs out of durability.</li>
 </ul>
-<h2 id="note-5"><a class="header" href="#note-5">Note</a></h2>
+<h2 id="note-6"><a class="header" href="#note-6">Note</a></h2>
 <p>The convention only enforces <em>where</em> the tag should be, it does not enforce the method by which you reduce durability. It also does not require that you have to keep <code>damage</code> and the vanilla <code>Damage</code> tag in sync.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="namespace-convention-"><a class="header" href="#namespace-convention-">Namespace Convention (<code>***</code>)</a></h1>
 <h2 id="about-7"><a class="header" href="#about-7">About</a></h2>
 <p>This convention aims to prevent conflict when deciding the name for your scoreboards, functions, storages, etc. by using a &quot;namespace prefix&quot;.</p>
 <h2 id="implementation-3"><a class="header" href="#implementation-3">Implementation</a></h2>
-<p>A namespace prefix must be used whenever it is possible. This includes tags (datapack), tags (<code>/tag</code>), nbts, scoreboards, functions, advancements, loot tables, structures, world generation settings, recipes, data storage.</p>
+<p>A namespace prefix must be used whenever it is possible. This includes tags (datapack), tags (<code>/tag</code>), teams, nbts, scoreboards, functions, advancements, loot tables, structures, world generation settings, recipes, data storage.</p>
 <p>There is no rule specifying how you should design your namespace prefix, but these are some of the examples:</p>
 <hr />
 <pre><code class="language-mcfunction">scoreboard objectives add bb.var dummy
@@ -734,7 +792,7 @@ Since it will be exposed to the user, so a nice readable name is quite important
 <p>In this example, I wrap the <code>custom_data</code> nbt inside another tag, allowing it to act as a namespace.</p>
 <hr />
 <p>The above examples are my style of namespacing, but there are many other approaches that you can take, such as <code>namespace_foo</code>, <code>NAMESPACEfoo</code>, <code>namespace.foo</code>, <code>namespace:foo</code> and <code>namespace/foo</code>. Your imagination is the limit!</p>
-<h2 id="note-6"><a class="header" href="#note-6">Note</a></h2>
+<h2 id="note-7"><a class="header" href="#note-7">Note</a></h2>
 <p>Using <code>minecraft</code> namespace to modify vanilla's behavior is a special case and it is allowed within a reasonable situation.<br />
 However, for example, setting <code>&quot;replace&quot;</code> to <code>true</code> in the <code>tick.json</code> function tag is not a &quot;reasonable situation&quot;, because that would prevent other datapacks from working.</p>
 <hr />
@@ -1150,7 +1208,7 @@ tellraw @a[tag=convention.debug] &lt;...&gt;
 </ul>
 </li>
 </ul>
-<h2 id="note-7"><a class="header" href="#note-7">Note</a></h2>
+<h2 id="note-8"><a class="header" href="#note-8">Note</a></h2>
 <ol>
 <li>We may rule a datapack out at our discretion, for reasons we would then specify.</li>
 <li>This requirement is not final and can be changed in the future.</li>
@@ -1237,7 +1295,7 @@ loot replace entity &lt;player&gt; weapon.offhand 1 mine ~ ~ ~ air{drop_contents
 data remove storage &lt;storage&gt; batch
 data remove storage &lt;storage&gt; inventory
 </code></pre>
-<h2 id="note-8"><a class="header" href="#note-8">Note</a></h2>
+<h2 id="note-9"><a class="header" href="#note-9">Note</a></h2>
 <p>In this example, I assume that you need to modify NBT of all available slots, but if you want to, say, modify only items in your hotbar, then you don't need to use the unneeded batches, e.g. the &quot;inventory&quot;, &quot;armor&quot; and &quot;offhand&quot; batches.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="holding-right-click-detection"><a class="header" href="#holding-right-click-detection">Holding Right Click Detection</a></h1>
 <h2 id="about-11"><a class="header" href="#about-11">About</a></h2>
@@ -1286,7 +1344,7 @@ scoreboard players set @s &lt;coas&gt; 0
 <p>5. Conclusion
 If <code>&lt;timer&gt;</code> is more than 0, we know that the player has right clicked within the last 5 ticks, since <code>&lt;timer&gt;</code> decreases by 1 every tick, and every time a right click is performed <code>&lt;timer&gt;</code> is set to 5 again.<br />
 We can use <code>execute if score @s &lt;timer&gt; matches 1..</code> to know if <code>&lt;timer&gt;</code> is more than or equal to 1.</p>
-<h2 id="note-9"><a class="header" href="#note-9">Note</a></h2>
+<h2 id="note-10"><a class="header" href="#note-10">Note</a></h2>
 <ul>
 <li><code>&lt;...&gt;</code> is a placeholder value that you have to replace with your own value.</li>
 <li><code>[...]</code> is a placeholder path to display relationship between each functions.</li>
