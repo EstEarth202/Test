@@ -605,42 +605,78 @@ You are <strong>not</strong> required to correctly set the traits of your custom
 kill @e[tag=dp.example]
 </code></pre>
 <h4 id="3-this-is-a-chunk-marker-entity-that-shouldnt-be-move-or-kill-by-other-datapack-so-this-entity-must-have-all-global-ignoring-tag"><a class="header" href="#3-this-is-a-chunk-marker-entity-that-shouldnt-be-move-or-kill-by-other-datapack-so-this-entity-must-have-all-global-ignoring-tag">3. This is a &quot;chunk marker&quot; entity that shouldn't be move or kill by other datapack, so this entity must have all global ignoring tag.</a></h4>
-<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: [ &quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ]}
+<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: [ &quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ,&quot;global.forceload&quot;]}
 </code></pre>
 <h4 id="4-if-you-dont-want-the-command-to-execute-because-the-area-contains-a-global-ignoring-tag"><a class="header" href="#4-if-you-dont-want-the-command-to-execute-because-the-area-contains-a-global-ignoring-tag">4. If you don't want the command to execute because the area contains a global ignoring tag.</a></h4>
 <pre><code class="language-mcfunction">execute if entity @e[tag=!global.ignore,distance=..30]
 execute unless entity @e[tag=global.ignore,distance=..30]
 </code></pre>
-<h4 id="5-use-score-to-filter-global-ignoring-tag---"><a class="header" href="#5-use-score-to-filter-global-ignoring-tag---">5. Use score to filter global ignoring tag. ( * )</a></h4>
-<pre><code class="language-mcfunction">scoreboard players set @e[tag=!global.ignore.kill] faq.pass 1
-kill @e[scores={faq.pass=1}]
+<h4 id="5-at-e-filter"><a class="header" href="#5-at-e-filter">5. <code>at @e</code> filter</a></h4>
+<pre><code class="language-mcfunction">execute at @e[tag=!global.ignore,tag=!global.ignore.pos] positioned ~ ~1.1 ~ run summon snowball ~ ~ ~ {Motion:[0.0d,-1.0d,0.0d]}
 </code></pre>
 <blockquote>
-<p>This method may be useful in some situations. ( ** )</p>
+<p>Since snowball could move the entity.</p>
 </blockquote>
-<h4 id="6-use-in-s---"><a class="header" href="#6-use-in-s---">6. Use in @s ( * )</a></h4>
+<h4 id="6-use-score-to-filter-global-ignoring-tag"><a class="header" href="#6-use-score-to-filter-global-ignoring-tag">6. Use score to filter global ignoring tag.</a></h4>
+<pre><code class="language-mcfunction">scoreboard players set @e[tag=!global.ignore.kill] dp.ignore 1
+kill @e[scores={dp.ignore=1}]
+</code></pre>
+<blockquote>
+<ul>
+<li>There is an additional command execution process
+and scores stored in the entity. ( * )</li>
+<li>This method may be used in some situations. But you need to make sure that your score isn't altered in any other way that you might do accidentally. ( ** )</li>
+</ul>
+</blockquote>
+<h4 id="7-use-in-s"><a class="header" href="#7-use-in-s">7. Use in @s</a></h4>
 <pre><code class="language-mcfunction">execute as @e[tag=!global.ignore] run function dp:example/kill
 
 #&gt; dp:example/kill 
 kill @s[tag=!global.ignore.kill]
+
+execute as @e[tag=!global.ignore] run function dp:example/tp
+
+#&gt; dp:example/tp
+tp @s[tag=!global.ignore.pos] ~ ~ ~
 </code></pre>
 <blockquote>
-<p>Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in <code>@s</code> it works normally. ( ** )</p>
-</blockquote>
-<blockquote>
 <ul>
-<li><strong>Q:</strong> Can I just only have <code>!global.ignore</code> in the <code>kill</code>, <code>tp</code> command? Because if that entity has <code>[ &quot;faq.maker&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ]</code> it won't be selected anyway. </li>
-<li><strong>A:</strong> Will be exempt in cases where <strong># Use in @s</strong> is true but shouldn't. Because if there is any issue in the future, we cannot ignore it. But don't worry, we'll review and clarify for you.</li>
+<li>Makes you have to include tags in <code>@s</code> more than <code>@e</code> selector. ( * )</li>
+<li>Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in <code>@s</code> it works normally. </li>
+<li>But you must ensure that no kills or no position change in any other way will occur during the execution of the command. ( ** )</li>
 </ul>
 </blockquote>
+<h4 id="8-only-use-globalignore---"><a class="header" href="#8-only-use-globalignore---">8. Only use <code>global.ignore</code> ( * )</a></h4>
+<pre><code class="language-mcfunction">summom armor_stand ~ ~ ~ {Tags: [ &quot;dp.example.custom_block&quot;, &quot;global.ignore&quot; ]}
+
+execute as @e[tag=!global.ignore] run kill @s
+execute as @e[tag=!global.ignore] run tp @S ~ ~ ~
+
+kill @e[tag=!global.ignore]
+</code></pre>
 <blockquote>
-<p><strong>Note</strong></p>
-<ul>
-<li>( * ) : <strong>Not recommended if you are unsure.</strong></li>
-<li>( ** ) : Be careful, man in the middle. </li>
-</ul>
+<p>Although you don't want entities to be &quot;kill&quot; and &quot;tp&quot;, you need to include tags. <code>global.ignore</code> as well, so it is not selected.</p>
 </blockquote>
-<p>But you need to make sure that your score isn't altered in any other way that you might do accidentally.</p>
+<h4 id="9-completely-use-all-global-ignoring-tags"><a class="header" href="#9-completely-use-all-global-ignoring-tags">9. Completely use all global ignoring tags</a></h4>
+<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: [ &quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ,&quot;global.forceload&quot; ]}
+
+summom armor_stand ~ ~ ~ {Tags: [ &quot;dp.example.custom_block&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ]}
+
+execute as @e[type=!player,tag=!global.ignore,tag=!global.ignore.pos,tag=!global.ignore.kill] run function dp:example/internal
+
+#&gt; dp:example/internal
+kill @s
+tp @s ~ ~ ~
+</code></pre>
+<blockquote>
+<p>Reviewer may not be very strict, Because there is a reason in section 8. ( *** )</p>
+</blockquote>
+<h3 id="note-4"><a class="header" href="#note-4"><strong>Note</strong></a></h3>
+<ul>
+<li>( * ) : <strong>Not recommended.</strong></li>
+<li>( ** ) : <strong>Be careful</strong></li>
+<li>( *** ) : <strong>It depends on the Reviewer's discretion.</strong></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="global-durability-"><a class="header" href="#global-durability-">Global Durability (<code>*</code>)</a></h1>
 <h2 id="about-6"><a class="header" href="#about-6">About</a></h2>
 <p>This convention extends the functionality of the <a href="conventions/./common_trait.html">Common Trait Convention</a> by providing a syntax for &quot;custom durability&quot; which can be useful for datapacks that add tools that have durability.</p>
@@ -662,7 +698,7 @@ kill @s[tag=!global.ignore.kill]
 <li><code>durability</code> is the maximum durability of the tool or the maximum damage the tool can take.</li>
 <li><code>broken</code> is a boolean specifying whether the item is &quot;broken&quot; (i.e. <a href="https://minecraft.gamepedia.com/Elytra">Broken Elytra</a>). This tag can be used in the case where you don't want to destroy the item when it runs out of durability.</li>
 </ul>
-<h2 id="note-4"><a class="header" href="#note-4">Note</a></h2>
+<h2 id="note-5"><a class="header" href="#note-5">Note</a></h2>
 <p>The convention only enforces <em>where</em> the tag should be, it does not enforce the method by which you reduce durability. It also does not require that you have to keep <code>damage</code> and the vanilla <code>Damage</code> tag in sync.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="namespace-convention-"><a class="header" href="#namespace-convention-">Namespace Convention (<code>***</code>)</a></h1>
 <h2 id="about-7"><a class="header" href="#about-7">About</a></h2>
@@ -698,7 +734,7 @@ Since it will be exposed to the user, so a nice readable name is quite important
 <p>In this example, I wrap the <code>custom_data</code> nbt inside another tag, allowing it to act as a namespace.</p>
 <hr />
 <p>The above examples are my style of namespacing, but there are many other approaches that you can take, such as <code>namespace_foo</code>, <code>NAMESPACEfoo</code>, <code>namespace.foo</code>, <code>namespace:foo</code> and <code>namespace/foo</code>. Your imagination is the limit!</p>
-<h2 id="note-5"><a class="header" href="#note-5">Note</a></h2>
+<h2 id="note-6"><a class="header" href="#note-6">Note</a></h2>
 <p>Using <code>minecraft</code> namespace to modify vanilla's behavior is a special case and it is allowed within a reasonable situation.<br />
 However, for example, setting <code>&quot;replace&quot;</code> to <code>true</code> in the <code>tick.json</code> function tag is not a &quot;reasonable situation&quot;, because that would prevent other datapacks from working.</p>
 <hr />
@@ -1114,7 +1150,7 @@ tellraw @a[tag=convention.debug] &lt;...&gt;
 </ul>
 </li>
 </ul>
-<h2 id="note-6"><a class="header" href="#note-6">Note</a></h2>
+<h2 id="note-7"><a class="header" href="#note-7">Note</a></h2>
 <ol>
 <li>We may rule a datapack out at our discretion, for reasons we would then specify.</li>
 <li>This requirement is not final and can be changed in the future.</li>
@@ -1201,7 +1237,7 @@ loot replace entity &lt;player&gt; weapon.offhand 1 mine ~ ~ ~ air{drop_contents
 data remove storage &lt;storage&gt; batch
 data remove storage &lt;storage&gt; inventory
 </code></pre>
-<h2 id="note-7"><a class="header" href="#note-7">Note</a></h2>
+<h2 id="note-8"><a class="header" href="#note-8">Note</a></h2>
 <p>In this example, I assume that you need to modify NBT of all available slots, but if you want to, say, modify only items in your hotbar, then you don't need to use the unneeded batches, e.g. the &quot;inventory&quot;, &quot;armor&quot; and &quot;offhand&quot; batches.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="holding-right-click-detection"><a class="header" href="#holding-right-click-detection">Holding Right Click Detection</a></h1>
 <h2 id="about-11"><a class="header" href="#about-11">About</a></h2>
@@ -1250,7 +1286,7 @@ scoreboard players set @s &lt;coas&gt; 0
 <p>5. Conclusion
 If <code>&lt;timer&gt;</code> is more than 0, we know that the player has right clicked within the last 5 ticks, since <code>&lt;timer&gt;</code> decreases by 1 every tick, and every time a right click is performed <code>&lt;timer&gt;</code> is set to 5 again.<br />
 We can use <code>execute if score @s &lt;timer&gt; matches 1..</code> to know if <code>&lt;timer&gt;</code> is more than or equal to 1.</p>
-<h2 id="note-8"><a class="header" href="#note-8">Note</a></h2>
+<h2 id="note-9"><a class="header" href="#note-9">Note</a></h2>
 <ul>
 <li><code>&lt;...&gt;</code> is a placeholder value that you have to replace with your own value.</li>
 <li><code>[...]</code> is a placeholder path to display relationship between each functions.</li>

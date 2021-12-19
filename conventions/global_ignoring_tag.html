@@ -176,42 +176,78 @@
 kill @e[tag=dp.example]
 </code></pre>
 <h4 id="3-this-is-a-chunk-marker-entity-that-shouldnt-be-move-or-kill-by-other-datapack-so-this-entity-must-have-all-global-ignoring-tag"><a class="header" href="#3-this-is-a-chunk-marker-entity-that-shouldnt-be-move-or-kill-by-other-datapack-so-this-entity-must-have-all-global-ignoring-tag">3. This is a &quot;chunk marker&quot; entity that shouldn't be move or kill by other datapack, so this entity must have all global ignoring tag.</a></h4>
-<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: [ &quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ]}
+<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: [ &quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ,&quot;global.forceload&quot;]}
 </code></pre>
 <h4 id="4-if-you-dont-want-the-command-to-execute-because-the-area-contains-a-global-ignoring-tag"><a class="header" href="#4-if-you-dont-want-the-command-to-execute-because-the-area-contains-a-global-ignoring-tag">4. If you don't want the command to execute because the area contains a global ignoring tag.</a></h4>
 <pre><code class="language-mcfunction">execute if entity @e[tag=!global.ignore,distance=..30]
 execute unless entity @e[tag=global.ignore,distance=..30]
 </code></pre>
-<h4 id="5-use-score-to-filter-global-ignoring-tag---"><a class="header" href="#5-use-score-to-filter-global-ignoring-tag---">5. Use score to filter global ignoring tag. ( * )</a></h4>
-<pre><code class="language-mcfunction">scoreboard players set @e[tag=!global.ignore.kill] faq.pass 1
-kill @e[scores={faq.pass=1}]
+<h4 id="5-at-e-filter"><a class="header" href="#5-at-e-filter">5. <code>at @e</code> filter</a></h4>
+<pre><code class="language-mcfunction">execute at @e[tag=!global.ignore,tag=!global.ignore.pos] positioned ~ ~1.1 ~ run summon snowball ~ ~ ~ {Motion:[0.0d,-1.0d,0.0d]}
 </code></pre>
 <blockquote>
-<p>This method may be useful in some situations. ( ** )</p>
+<p>Since snowball could move the entity.</p>
 </blockquote>
-<h4 id="6-use-in-s---"><a class="header" href="#6-use-in-s---">6. Use in @s ( * )</a></h4>
+<h4 id="6-use-score-to-filter-global-ignoring-tag"><a class="header" href="#6-use-score-to-filter-global-ignoring-tag">6. Use score to filter global ignoring tag.</a></h4>
+<pre><code class="language-mcfunction">scoreboard players set @e[tag=!global.ignore.kill] dp.ignore 1
+kill @e[scores={dp.ignore=1}]
+</code></pre>
+<blockquote>
+<ul>
+<li>There is an additional command execution process
+and scores stored in the entity. ( * )</li>
+<li>This method may be used in some situations. But you need to make sure that your score isn't altered in any other way that you might do accidentally. ( ** )</li>
+</ul>
+</blockquote>
+<h4 id="7-use-in-s"><a class="header" href="#7-use-in-s">7. Use in @s</a></h4>
 <pre><code class="language-mcfunction">execute as @e[tag=!global.ignore] run function dp:example/kill
 
 #&gt; dp:example/kill 
 kill @s[tag=!global.ignore.kill]
+
+execute as @e[tag=!global.ignore] run function dp:example/tp
+
+#&gt; dp:example/tp
+tp @s[tag=!global.ignore.pos] ~ ~ ~
 </code></pre>
 <blockquote>
-<p>Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in <code>@s</code> it works normally. ( ** )</p>
-</blockquote>
-<blockquote>
 <ul>
-<li><strong>Q:</strong> Can I just only have <code>!global.ignore</code> in the <code>kill</code>, <code>tp</code> command? Because if that entity has <code>[ &quot;faq.maker&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ]</code> it won't be selected anyway. </li>
-<li><strong>A:</strong> Will be exempt in cases where <strong># Use in @s</strong> is true but shouldn't. Because if there is any issue in the future, we cannot ignore it. But don't worry, we'll review and clarify for you.</li>
+<li>Makes you have to include tags in <code>@s</code> more than <code>@e</code> selector. ( * )</li>
+<li>Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in <code>@s</code> it works normally. </li>
+<li>But you must ensure that no kills or no position change in any other way will occur during the execution of the command. ( ** )</li>
 </ul>
 </blockquote>
+<h4 id="8-only-use-globalignore---"><a class="header" href="#8-only-use-globalignore---">8. Only use <code>global.ignore</code> ( * )</a></h4>
+<pre><code class="language-mcfunction">summom armor_stand ~ ~ ~ {Tags: [ &quot;dp.example.custom_block&quot;, &quot;global.ignore&quot; ]}
+
+execute as @e[tag=!global.ignore] run kill @s
+execute as @e[tag=!global.ignore] run tp @S ~ ~ ~
+
+kill @e[tag=!global.ignore]
+</code></pre>
 <blockquote>
-<p><strong>Note</strong></p>
-<ul>
-<li>( * ) : <strong>Not recommended if you are unsure.</strong></li>
-<li>( ** ) : Be careful, man in the middle. </li>
-</ul>
+<p>Although you don't want entities to be &quot;kill&quot; and &quot;tp&quot;, you need to include tags. <code>global.ignore</code> as well, so it is not selected.</p>
 </blockquote>
-<p>But you need to make sure that your score isn't altered in any other way that you might do accidentally.</p>
+<h4 id="9-completely-use-all-global-ignoring-tags"><a class="header" href="#9-completely-use-all-global-ignoring-tags">9. Completely use all global ignoring tags</a></h4>
+<pre><code class="language-mcfunction">summom marker ~ ~ ~ {Tags: [ &quot;dp.example&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ,&quot;global.forceload&quot; ]}
+
+summom armor_stand ~ ~ ~ {Tags: [ &quot;dp.example.custom_block&quot;, &quot;global.ignore&quot;, &quot;global.ignore.pos&quot;, &quot;global.ignore.kill&quot; ]}
+
+execute as @e[type=!player,tag=!global.ignore,tag=!global.ignore.pos,tag=!global.ignore.kill] run function dp:example/internal
+
+#&gt; dp:example/internal
+kill @s
+tp @s ~ ~ ~
+</code></pre>
+<blockquote>
+<p>Reviewer may not be very strict, Because there is a reason in section 8. ( *** )</p>
+</blockquote>
+<h3 id="note-1"><a class="header" href="#note-1"><strong>Note</strong></a></h3>
+<ul>
+<li>( * ) : <strong>Not recommended.</strong></li>
+<li>( ** ) : <strong>Be careful</strong></li>
+<li>( *** ) : <strong>It depends on the Reviewer's discretion.</strong></li>
+</ul>
 
                     </main>
 
