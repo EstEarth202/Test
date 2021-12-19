@@ -67,7 +67,7 @@ kill @e[tag=dp.example]
 
 #### 3. This is a "chunk marker" entity that shouldn't be move or kill by other datapack, so this entity must have all global ignoring tag.
 ```mcfunction
-summom marker ~ ~ ~ {Tags: [ "dp.example", "global.ignore", "global.ignore.pos", "global.ignore.kill" ]}
+summom marker ~ ~ ~ {Tags: [ "dp.example", "global.ignore", "global.ignore.pos", "global.ignore.kill" ,"global.forceload"]}
 ```
 
 #### 4. If you don't want the command to execute because the area contains a global ignoring tag. 
@@ -76,31 +76,71 @@ execute if entity @e[tag=!global.ignore,distance=..30]
 execute unless entity @e[tag=global.ignore,distance=..30]
 ```
 
-#### 5. Use score to filter global ignoring tag. ( * )
+#### 5. `at @e` filter
 ```mcfunction
-scoreboard players set @e[tag=!global.ignore.kill] faq.pass 1
-kill @e[scores={faq.pass=1}]
+execute at @e[tag=!global.ignore,tag=!global.ignore.pos] positioned ~ ~1.1 ~ run summon snowball ~ ~ ~ {Motion:[0.0d,-1.0d,0.0d]}
 ```
 
-> This method may be useful in some situations. ( ** )
+> Since snowball could move the entity.
 
-#### 6. Use in @s ( * )
+#### 6. Use score to filter global ignoring tag.
+```mcfunction
+scoreboard players set @e[tag=!global.ignore.kill] dp.ignore 1
+kill @e[scores={dp.ignore=1}]
+```
+
+> - There is an additional command execution process
+and scores stored in the entity. ( * )
+> - This method may be used in some situations. But you need to make sure that your score isn't altered in any other way that you might do accidentally. ( ** )
+
+#### 7. Use in @s
 
 ```mcfunction
 execute as @e[tag=!global.ignore] run function dp:example/kill
 
 #> dp:example/kill 
 kill @s[tag=!global.ignore.kill]
+
+execute as @e[tag=!global.ignore] run function dp:example/tp
+
+#> dp:example/tp
+tp @s[tag=!global.ignore.pos] ~ ~ ~
 ```
 
-> Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in `@s` it works normally. ( ** )
+> - Makes you have to include tags in `@s` more than `@e` selector. ( * )
+> - Some cases, you use global ignoring tags at entry selectors, it may cause the command to not work as you want. But then you find that using it in `@s` it works normally. 
+> - But you must ensure that no kills or no position change in any other way will occur during the execution of the command. ( ** )
 
+#### 8. Only use `global.ignore` ( * )
 
-> - **Q:** Can I just only have `!global.ignore` in the `kill`, `tp` command? Because if that entity has `[ "faq.maker", "global.ignore", "global.ignore.pos", "global.ignore.kill" ]` it won't be selected anyway. 
-> - **A:** Will be exempt in cases where **# Use in @s** is true but shouldn't. Because if there is any issue in the future, we cannot ignore it. But don't worry, we'll review and clarify for you.
+```mcfunction
+summom armor_stand ~ ~ ~ {Tags: [ "dp.example.custom_block", "global.ignore" ]}
 
-> **Note**
-> - ( * ) : **Not recommended if you are unsure.**
-> - ( ** ) : Be careful, man in the middle. 
+execute as @e[tag=!global.ignore] run kill @s
+execute as @e[tag=!global.ignore] run tp @S ~ ~ ~
 
-But you need to make sure that your score isn't altered in any other way that you might do accidentally.
+kill @e[tag=!global.ignore]
+```
+
+> Although you don't want entities to be "kill" and "tp", you need to include tags. `global.ignore` as well, so it is not selected.
+
+#### 9. Completely use all global ignoring tags
+
+```mcfunction
+summom marker ~ ~ ~ {Tags: [ "dp.example", "global.ignore", "global.ignore.pos", "global.ignore.kill" ,"global.forceload" ]}
+
+summom armor_stand ~ ~ ~ {Tags: [ "dp.example.custom_block", "global.ignore", "global.ignore.pos", "global.ignore.kill" ]}
+
+execute as @e[type=!player,tag=!global.ignore,tag=!global.ignore.pos,tag=!global.ignore.kill] run function dp:example/internal
+
+#> dp:example/internal
+kill @s
+tp @s ~ ~ ~
+```
+
+> Reviewer may not be very strict, Because there is a reason in section 8. ( *** )
+
+### **Note**
+- ( * ) : **Not recommended.**
+- ( ** ) : **Be careful**
+- ( *** ) : **It depends on the Reviewer's discretion.**
