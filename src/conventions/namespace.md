@@ -6,7 +6,7 @@ This convention aims to prevent conflict when deciding the name for your scorebo
 
 ## Implementation
 
-A namespace prefix must be used whenever it is possible. This includes tags (datapack), tags (`/tag`), nbts, scoreboards, functions, advancements, loot tables, structures, world generation settings, recipes, data storage.
+A namespace prefix must be used whenever it is possible. This includes tags (datapack), tags (`/tag`), teams, nbts, scoreboards, functions, advancements, loot tables, structures, world generation settings, recipes, data storage.
 
 There is no rule specifying how you should design your namespace prefix, but these are some of the examples:
 
