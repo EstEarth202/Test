@@ -6,7 +6,7 @@ Most of the time, the message will be an installation message, in which case you
 
 --------------------
 
-### **Note from Convention Mod (Optional)**
+### **Additional Guideline (Optional)**
 
 ### **Exception cases**
 
